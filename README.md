@@ -48,8 +48,15 @@ También puedes usar `npx serve .` si prefieres Node. No abras `index.html` con 
 ├─ terminos/index.html         Condiciones de uso (ES/EN)
 ├─ privacidad.html             Redirección a /privacidad/
 ├─ legal.css · legal.js        Estilos y cambio de idioma de las páginas legales
+├─ sw.js                       Service worker (app-shell + fallback offline)
+├─ pwa.js                      Registro del service worker (todas las páginas)
+├─ offline.html                Página de sin conexión
+├─ manifest.webmanifest        Manifiesto de la PWA
 ├─ assets/
-│  ├─ icon.png                 Icono de la app (también OG image)
+│  ├─ icon.png                 Icono base 1024 (también OG image)
+│  ├─ icon-192.png · icon-512.png
+│  ├─ icon-maskable-192.png · icon-maskable-512.png
+│  ├─ apple-touch-icon.png     Icono iOS 180
 │  └─ michidoku-icon.svg       Icono vectorial
 ├─ .well-known/
 │  ├─ assetlinks.json          App Links de Android
@@ -57,7 +64,7 @@ También puedes usar `npx serve .` si prefieres Node. No abras `index.html` con 
 ├─ .github/workflows/deploy.yml
 ├─ CNAME                       Dominio personalizado de Pages
 ├─ .nojekyll                   Evita el procesado de Jekyll
-├─ robots.txt · sitemap.xml · manifest.webmanifest
+├─ robots.txt · sitemap.xml
 └─ README.md
 ```
 
