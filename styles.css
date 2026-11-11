@@ -2473,6 +2473,7 @@ p {
 /* Huellas que pasean por el fondo ----------------------------------------- */
 .paw-trail {
   position: fixed;
+  background: rgba(255,0,0,0.25);
   inset: 0;
   z-index: 0;
   overflow: hidden;
