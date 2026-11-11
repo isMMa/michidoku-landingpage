@@ -154,6 +154,79 @@
   }
 
   /* ---------------------------------------------------------------------- */
+  /* Huellas que pasean por el fondo                                         */
+  /* ---------------------------------------------------------------------- */
+  var PAW_SHAPE = '<ellipse cx="12" cy="16.2" rx="5.1" ry="4.3"/>' +
+    '<ellipse cx="5.3" cy="10.6" rx="2.35" ry="3" transform="rotate(-20 5.3 10.6)"/>' +
+    '<ellipse cx="9.4" cy="6.6" rx="2.2" ry="2.9"/>' +
+    '<ellipse cx="14.6" cy="6.6" rx="2.2" ry="2.9"/>' +
+    '<ellipse cx="18.7" cy="10.6" rx="2.35" ry="3" transform="rotate(20 18.7 10.6)"/>';
+
+  function randomBetween(min, max) {
+    return min + Math.random() * (max - min);
+  }
+
+  var pawTrail = null;
+  var pawWalkTimer = null;
+
+  function schedulePawWalk(delay) {
+    window.clearTimeout(pawWalkTimer);
+    pawWalkTimer = window.setTimeout(pawWalk, delay);
+  }
+
+  function pawWalk() {
+    if (document.hidden) {
+      schedulePawWalk(6000);
+      return;
+    }
+
+    if (!pawTrail) {
+      pawTrail = document.createElement('div');
+      pawTrail.className = 'paw-trail';
+      pawTrail.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(pawTrail);
+    }
+    pawTrail.textContent = '';
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var toRight = Math.random() < 0.5;
+    var startY = randomBetween(height * 0.1, height * 0.72);
+    var endY = Math.min(Math.max(startY + randomBetween(-height * 0.28, height * 0.28), height * 0.12), height * 0.84);
+    var startX = toRight ? -34 : width + 34;
+    var endX = toRight ? width + 34 : -34;
+
+    var distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+    var step = Math.max(56, Math.min(104, width * 0.075));
+    var count = Math.min(13, Math.max(5, Math.round(distance / step)));
+    var angle = Math.atan2(endY - startY, endX - startX);
+    var stepTime = randomBetween(0.24, 0.34);
+    var lastDelay = 0;
+
+    for (var i = 0; i < count; i++) {
+      var t = count > 1 ? i / (count - 1) : 0;
+      var side = i % 2 === 0 ? -1 : 1;
+      var stagger = step * 0.17;
+      var paw = document.createElement('span');
+      lastDelay = i * stepTime;
+      paw.className = 'paw-print';
+      paw.style.left = (startX + (endX - startX) * t - Math.sin(angle) * side * stagger).toFixed(1) + 'px';
+      paw.style.top = (startY + (endY - startY) * t + Math.cos(angle) * side * stagger).toFixed(1) + 'px';
+      paw.style.setProperty('--paw-size', randomBetween(18, 27).toFixed(1) + 'px');
+      paw.style.setProperty('--paw-ink', randomBetween(0.16, 0.3).toFixed(2));
+      paw.style.setProperty('--paw-angle', ((angle + side * 0.18) * 180 / Math.PI).toFixed(1) + 'deg');
+      paw.style.setProperty('--paw-delay', lastDelay.toFixed(2) + 's');
+      paw.style.setProperty('--paw-life', randomBetween(3.1, 4.2).toFixed(2) + 's');
+      paw.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + PAW_SHAPE + '</svg>';
+      pawTrail.appendChild(paw);
+    }
+
+    schedulePawWalk((lastDelay + 4.2) * 1000 + randomBetween(8000, 19000));
+  }
+
+  if (!prefersReduced) schedulePawWalk(randomBetween(3500, 7000));
+
+  /* ---------------------------------------------------------------------- */
   /* Escenario del hero                                                      */
   /* ---------------------------------------------------------------------- */
   var heroCatHost = $('#hero-cat');
