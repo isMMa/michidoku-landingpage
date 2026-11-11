@@ -5,13 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Página no encontrada · Michidoku</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" href="/assets/michidoku-icon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Michidoku">
+  <meta name="application-name" content="Michidoku">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <script>
-    (function () { try { var t = localStorage.getItem('michidoku-theme'); if (t === 'claro' || t === 'noche') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();
+    (function () {
+      try {
+        var mode = localStorage.getItem('michidoku-theme-mode');
+        if (mode !== 'claro' && mode !== 'noche' && mode !== 'auto') {
+          var saved = localStorage.getItem('michidoku-theme');
+          mode = saved === 'claro' || saved === 'noche' ? saved : 'auto';
+        }
+        document.documentElement.setAttribute('data-theme', mode === 'auto'
+          ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noche')
+          : mode);
+      } catch (e) {}
+    })();
   </script>
   <style>
     body { min-height: 100vh; display: flex; flex-direction: column; }
@@ -30,7 +47,7 @@
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Michidoku, volver a la web">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M12 29c0-7 5.4-12 12-12s12 5 12 12-5.4 11-12 11-12-4-12-11Z" fill="#3A2114"/><path d="M12 21 9 8l10 6M36 21l3-13-10 6" fill="#3A2114"/><path d="M12 21 10 12l7 4M36 21l2-9-7 4" fill="#F08A9B"/><ellipse cx="19" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><ellipse cx="29" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><path d="M24 31.5 21.8 34h4.4L24 31.5Z" fill="#F08A9B"/><path d="M24 34v2m0 0c-1.5 1.6-3.4 1.3-4.2.4M24 36c1.5 1.6 3.4 1.3 4.2.4" fill="none" stroke="#FFF6E6" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <img src="/assets/logo.png" alt="" width="40" height="40">
         </span>
         <span>Michidoku</span>
       </a>
@@ -62,6 +79,7 @@
   </svg>
 
   <script src="/cats.js"></script>
+  <script src="/pwa.js" defer></script>
   <script>
     (function () {
       var host = document.getElementById('nf-cat');

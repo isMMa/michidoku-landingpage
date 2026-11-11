@@ -136,6 +136,7 @@
     { name: 'Chispa', color: 'gris-oscuro' },
     { name: 'Humo', color: 'gris-oscuro' },
     { name: 'Grafito', color: 'gris-oscuro' },
+    { name: 'Dorado', color: 'dorado' },
     { name: 'Sol', color: 'dorado' },
     { name: 'Miel', color: 'dorado' },
     { name: 'Ámbar', color: 'dorado' },

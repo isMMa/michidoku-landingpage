@@ -10,25 +10,59 @@
   var $$ = function (selector, scope) { return Array.prototype.slice.call((scope || document).querySelectorAll(selector)); };
 
   /* ---------------------------------------------------------------------- */
-  /* Tema día / noche                                                        */
+  /* Tema claro / oscuro / automático                                        */
   /* ---------------------------------------------------------------------- */
   var root = document.documentElement;
-  var themeButton = $('#theme-toggle');
   var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var themeSwitch = $('#theme-switch');
+  var themeButtons = $$('[data-theme-mode]');
+  var lightQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
 
-  function applyTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    if (themeMeta) themeMeta.setAttribute('content', theme === 'claro' ? '#fff8ef' : '#080b16');
-    if (themeButton) {
-      themeButton.setAttribute('aria-label', theme === 'claro' ? 'Cambiar al tema noche' : 'Cambiar al tema día');
-    }
-    try { localStorage.setItem('michidoku-theme', theme); } catch (error) { /* sin almacenamiento */ }
+  function resolveTheme(mode) {
+    if (mode === 'claro' || mode === 'noche') return mode;
+    return lightQuery && lightQuery.matches ? 'claro' : 'noche';
   }
 
-  if (themeButton) {
-    themeButton.addEventListener('click', function () {
-      applyTheme(root.getAttribute('data-theme') === 'claro' ? 'noche' : 'claro');
+  function applyThemeMode(mode, persist) {
+    if (mode !== 'claro' && mode !== 'noche' && mode !== 'auto') mode = 'auto';
+    var theme = resolveTheme(mode);
+    root.setAttribute('data-theme', theme);
+    root.setAttribute('data-theme-mode', mode);
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'claro' ? '#fff8ef' : '#080b16');
+    if (themeSwitch) themeSwitch.setAttribute('data-mode', mode);
+    themeButtons.forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.dataset.themeMode === mode));
     });
+    if (persist) {
+      try {
+        localStorage.setItem('michidoku-theme-mode', mode);
+        localStorage.setItem('michidoku-theme', theme);
+      } catch (error) { /* sin almacenamiento */ }
+    }
+  }
+
+  var storedMode = 'auto';
+  try {
+    storedMode = localStorage.getItem('michidoku-theme-mode');
+    if (storedMode !== 'claro' && storedMode !== 'noche' && storedMode !== 'auto') {
+      var storedTheme = localStorage.getItem('michidoku-theme');
+      storedMode = storedTheme === 'claro' || storedTheme === 'noche' ? storedTheme : 'auto';
+    }
+  } catch (error) { /* sin almacenamiento */ }
+  applyThemeMode(storedMode, false);
+
+  themeButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      applyThemeMode(button.dataset.themeMode, true);
+    });
+  });
+
+  if (lightQuery) {
+    var onSystemThemeChange = function () {
+      if (root.getAttribute('data-theme-mode') === 'auto') applyThemeMode('auto', false);
+    };
+    if (lightQuery.addEventListener) lightQuery.addEventListener('change', onSystemThemeChange);
+    else if (lightQuery.addListener) lightQuery.addListener(onSystemThemeChange);
   }
 
   /* ---------------------------------------------------------------------- */

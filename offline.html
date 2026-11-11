@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es" data-theme="noche">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sin conexión · Michidoku</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#080b16">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="/assets/michidoku-icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <script>
+    (function () {
+      try {
+        var mode = localStorage.getItem('michidoku-theme-mode');
+        if (mode !== 'claro' && mode !== 'noche' && mode !== 'auto') {
+          var saved = localStorage.getItem('michidoku-theme');
+          mode = saved === 'claro' || saved === 'noche' ? saved : 'auto';
+        }
+        document.documentElement.setAttribute('data-theme', mode === 'auto'
+          ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noche')
+          : mode);
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #080b16;
+      --card: #111528;
+      --text: #f4f1ff;
+      --muted: #a9a3c2;
+      --accent: #ffc93c;
+      --line: rgba(255, 255, 255, .1);
+      --shadow: 0 30px 60px rgba(0, 0, 0, .45);
+      color-scheme: dark;
+    }
+    [data-theme="claro"] {
+      --bg: #fdf6ea;
+      --card: #fffdf8;
+      --text: #2b2418;
+      --muted: #6d6353;
+      --accent: #c98200;
+      --line: rgba(43, 36, 24, .12);
+      --shadow: 0 30px 60px rgba(80, 60, 20, .16);
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Nunito Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+      text-align: center;
+    }
+    .card {
+      width: min(520px, 100%);
+      padding: 44px 30px 34px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .mark { display: block; width: 92px; height: 92px; margin: 0 auto 20px; }
+    .code {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h1 {
+      margin: 12px 0 12px;
+      font-family: "Fredoka", "Nunito Sans", system-ui, sans-serif;
+      font-size: clamp(1.9rem, 6vw, 2.6rem);
+      line-height: 1.1;
+    }
+    p { margin: 0 0 26px; color: var(--muted); line-height: 1.6; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      color: #221a06;
+      background: var(--accent);
+      transition: transform .18s ease, filter .18s ease;
+    }
+    .btn.ghost {
+      color: var(--text);
+      background: transparent;
+      border-color: var(--line);
+    }
+    .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .hint { margin: 22px 0 0; font-size: .82rem; color: var(--muted); }
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="mark" src="/assets/michidoku-icon.svg" alt="" width="92" height="92">
+    <span class="code">Sin conexión</span>
+    <h1>El ovillo se enredó<br>con la red</h1>
+    <p>No pudimos cargar esta página porque no hay internet. Vuelve a intentarlo cuando recuperes la conexión: tus partidas guardadas siguen en este dispositivo.</p>
+    <div class="actions">
+      <button class="btn" type="button" id="reintentar">Reintentar</button>
+      <a class="btn ghost" href="/">Volver a la casa</a>
+    </div>
+    <p class="hint">Michidoku funciona sin cuentas y sin servidores propios.</p>
+  </main>
+  <script>
+    document.getElementById('reintentar').addEventListener('click', function () {
+      location.reload();
+    });
+  </script>
+</body>
+</html>

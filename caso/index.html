@@ -8,7 +8,7 @@
       name="description"
       content="Te han retado a resolver un caso de Michidoku. Abre el enlace para jugar exactamente el mismo tablero."
     />
-    <meta name="robots" content="noindex" />
+    <meta name="robots" content="noindex, follow" />
     <meta name="theme-color" content="#080b16" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Michidoku" />
@@ -17,8 +17,24 @@
       property="og:description"
       content="Un caso de deducción gatuna te espera. ¿Puedes encontrar al travieso?"
     />
-    <meta property="og:image" content="https://michidoku.devcodelight.com/assets/icon.png" />
-    <link rel="icon" href="../assets/icon.png" />
+    <meta property="og:image" content="https://michidoku.devcodelight.com/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Michidoku: ¿Quién rompió el ovillo? Juego de deducción gatuna." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Caso compartido · Michidoku" />
+    <meta
+      name="twitter:description"
+      content="Un caso de deducción gatuna te espera. ¿Puedes encontrar al travieso?"
+    />
+    <meta name="twitter:image" content="https://michidoku.devcodelight.com/assets/og-image.png" />
+    <link rel="icon" href="../assets/logo.png" />
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Michidoku" />
+    <meta name="application-name" content="Michidoku" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -51,7 +67,7 @@
       <header class="page-header">
         <div class="inner">
           <a class="page-brand" href="../">
-            <img src="../assets/michidoku-icon.svg" alt="" width="38" height="38" />
+            <img src="../assets/logo.png" alt="" width="38" height="38" />
             <span>Michidoku</span>
           </a>
           <a class="back" href="../">Volver a la web</a>
@@ -128,5 +144,6 @@
 
     <script src="../cats.js" defer></script>
     <script src="caso.js" defer></script>
+    <script src="../pwa.js" defer></script>
   </body>
 </html>
