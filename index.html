@@ -4,8 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Michidoku · El juego de deducción gatuna</title>
-  <meta name="description" content="Sigue las pistas, coloca a cada michi y descubre quién rompió el ovillo. Michidoku es un juego de deducción con gatos únicos, casos diarios, modo historia y un legendario gato dorado. Muy pronto en Android e iOS.">
+  <meta name="description" content="Sigue las pistas, coloca a cada michi y descubre quién rompió el ovillo. Un juego de deducción con gatos, casos diarios e historia. Muy pronto en Android e iOS.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://michidoku.devcodelight.com/">
+  <link rel="alternate" hreflang="es" href="https://michidoku.devcodelight.com/">
+  <link rel="alternate" hreflang="x-default" href="https://michidoku.devcodelight.com/">
   <meta name="theme-color" content="#080b16">
   <meta name="color-scheme" content="dark light">
 
@@ -14,16 +17,25 @@
   <meta property="og:title" content="Michidoku · ¿Quién rompió el ovillo?">
   <meta property="og:description" content="Un juego de deducción gatuna. Sigue las pistas, coloca a cada michi y encuentra al travieso. Conoce a los gatos, el modo historia y el legendario gato dorado.">
   <meta property="og:url" content="https://michidoku.devcodelight.com/">
-  <meta property="og:image" content="https://michidoku.devcodelight.com/assets/icon.png">
-  <meta property="og:image:alt" content="Icono de Michidoku: una ficha ámbar con la cara de un michi crema.">
+  <meta property="og:image" content="https://michidoku.devcodelight.com/assets/og-image.png">
+  <meta property="og:image:secure_url" content="https://michidoku.devcodelight.com/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Michidoku: ¿Quién rompió el ovillo? Juego de deducción gatuna con un michi crema sobre fondo crema.">
   <meta property="og:locale" content="es_ES">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Michidoku · ¿Quién rompió el ovillo?">
   <meta name="twitter:description" content="Un juego de deducción gatuna con casos diarios, historia y un legendario gato dorado.">
-  <meta name="twitter:image" content="https://michidoku.devcodelight.com/assets/icon.png">
+  <meta name="twitter:image" content="https://michidoku.devcodelight.com/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Michidoku: ¿Quién rompió el ovillo? Juego de deducción gatuna con un michi crema sobre fondo crema.">
 
   <link rel="icon" href="assets/michidoku-icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Michidoku">
+  <meta name="application-name" content="Michidoku">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800;6..12,900&display=swap" rel="stylesheet">
@@ -32,10 +44,16 @@
   <script>
     (function () {
       try {
-        var saved = localStorage.getItem('michidoku-theme');
-        if (saved === 'claro' || saved === 'noche') {
-          document.documentElement.setAttribute('data-theme', saved);
+        var mode = localStorage.getItem('michidoku-theme-mode');
+        if (mode !== 'claro' && mode !== 'noche' && mode !== 'auto') {
+          var saved = localStorage.getItem('michidoku-theme');
+          mode = saved === 'claro' || saved === 'noche' ? saved : 'auto';
         }
+        var theme = mode === 'auto'
+          ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noche')
+          : mode;
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-theme-mode', mode);
       } catch (error) { /* almacenamiento no disponible */ }
     })();
   </script>
@@ -90,6 +108,7 @@
     <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.6A8.5 8.5 0 0 1 9.4 4 8.5 8.5 0 1 0 20 14.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-auto" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.3 15.3 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
@@ -109,7 +128,7 @@
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="Michidoku, volver arriba">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M12 29c0-7 5.4-12 12-12s12 5 12 12-5.4 11-12 11-12-4-12-11Z" fill="#3A2114"/><path d="M12 21 9 8l10 6M36 21l3-13-10 6" fill="#3A2114"/><path d="M12 21 10 12l7 4M36 21l2-9-7 4" fill="#F08A9B"/><ellipse cx="19" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><ellipse cx="29" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><path d="M24 31.5 21.8 34h4.4L24 31.5Z" fill="#F08A9B"/><path d="M24 34v2m0 0c-1.5 1.6-3.4 1.3-4.2.4M24 36c1.5 1.6 3.4 1.3 4.2.4" fill="none" stroke="#FFF6E6" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <img src="assets/logo.png" alt="" width="40" height="40">
         </span>
         <span>Michidoku</span>
       </a>
@@ -123,10 +142,18 @@
       </nav>
 
       <div class="header-actions">
-        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Cambiar entre tema día y noche" title="Cambiar tema">
-          <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
-          <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
-        </button>
+        <div class="theme-switch" id="theme-switch" role="group" aria-label="Tema de la página" data-mode="auto">
+          <span class="theme-thumb" aria-hidden="true"></span>
+          <button type="button" data-theme-mode="claro" aria-pressed="false" title="Tema claro" aria-label="Tema claro">
+            <svg aria-hidden="true"><use href="#i-sun"/></svg>
+          </button>
+          <button type="button" data-theme-mode="noche" aria-pressed="false" title="Tema oscuro" aria-label="Tema oscuro">
+            <svg aria-hidden="true"><use href="#i-moon"/></svg>
+          </button>
+          <button type="button" data-theme-mode="auto" aria-pressed="true" title="Tema automático" aria-label="Tema automático">
+            <svg aria-hidden="true"><use href="#i-auto"/></svg>
+          </button>
+        </div>
         <a class="btn btn--small" href="#descargar">
           <svg aria-hidden="true"><use href="#i-paw"/></svg>
           Muy pronto
@@ -415,8 +442,8 @@
 
           <article class="bento-card bento-b reveal reveal-delay-1">
             <span class="kicker">Modo historia</span>
-            <h3>20 niveles, una camada</h3>
-            <p>Casos cortos que enseñan a leer la casa paso a paso. Completa el capítulo y gana accesorios exclusivos para tu gato.</p>
+            <h3>Distintos niveles, una camada</h3>
+            <p>El modo historia tiene distintos niveles, para que aprendas a jugar y consigas accesorios exclusivos para tu gato.</p>
             <svg class="bento-art bento-art--trail" viewBox="0 0 150 110" aria-hidden="true">
               <path d="M8 92C40 82 38 52 70 50S112 32 142 18" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="2 8" stroke-linecap="round" opacity=".65"/>
               <g fill="var(--accent)" opacity=".75">
@@ -442,8 +469,8 @@
 
           <article class="bento-card bento-d reveal reveal-delay-1">
             <span class="kicker">Gato legendario</span>
-            <h3>El dorado reparte suerte</h3>
-            <p>De vez en cuando aparece un michi de oro con corona. Si resuelves el caso, los puntos se duplican.</p>
+            <h3>El legendario gato dorado</h3>
+            <p>Si tienes suerte aparece el gato dorado. Hay un 5% de posibilidad de que aparezca.</p>
             <svg class="bento-art bento-art--stars" viewBox="0 0 64 64" aria-hidden="true">
               <path d="m32 4 6 18 18 6-18 6-6 18-6-18-18-6 18-6 6-18Z" fill="var(--gold)" opacity=".85"/>
               <path d="m52 42 2.4 7.2L62 52l-7.6 2.8L52 62l-2.4-7.2L42 52l7.6-2.8L52 42Z" fill="var(--gold)" opacity=".5"/>
@@ -452,8 +479,8 @@
 
           <article class="bento-card bento-e reveal reveal-delay-2">
             <span class="kicker">Tu michi, tu estilo</span>
-            <h3>Viste a tu detective</h3>
-            <p>Lazo, gafas, sombrero, bigote o bufanda. Gana estrellas jugando y desbloquea accesorios para tu gato.</p>
+            <h3>Personaliza a tu detective</h3>
+            <p>Lazo, gafas, sombrero, bigote o bufanda. Gana estrellas jugando y desbloquea accesorios para tu gato. ¡Pero cuidado! También puede ser el gato travieso.</p>
             <div class="mode-pills">
               <span>Lazo</span><span>Gafas</span><span>Bufanda</span><span>Corona</span>
             </div>
@@ -511,8 +538,8 @@
         <div class="history">
           <div class="reveal">
             <span class="eyebrow">Modo historia</span>
-            <h2 id="historia-title" style="margin:16px 0 18px">Aprende a leer la casa, nivel a nivel</h2>
-            <p class="lead">Veinte casos cortos encadenados. Cada nivel añade una pista nueva y te enseña a mirar la casa como un detective. Completa el capítulo básico y llévate la codiciada corona de bronce.</p>
+            <h2 id="historia-title" style="margin:16px 0 18px">Aprende a jugar, nivel a nivel</h2>
+            <p class="lead">Distintos casos cortos encadenados. Cada nivel añade una pista nueva y te enseña a mirar la casa como un detective. Completa el capítulo básico y llévate la codiciada corona de bronce.</p>
             <ul style="list-style:none;padding:0;margin:24px 0 0;display:grid;gap:11px;color:var(--muted);font-size:.93rem">
               <li style="display:flex;gap:10px;align-items:flex-start"><svg aria-hidden="true" style="width:19px;height:19px;color:var(--green);flex:none;margin-top:3px"><use href="#i-check"/></svg><span>Casos de 4×4 para aprender sin prisa</span></li>
               <li style="display:flex;gap:10px;align-items:flex-start"><svg aria-hidden="true" style="width:19px;height:19px;color:var(--green);flex:none;margin-top:3px"><use href="#i-check"/></svg><span>Recompensas exclusivas: bufanda y corona de bronce</span></li>
@@ -562,10 +589,6 @@
             <summary>¿Puedo compartir un caso con alguien?</summary>
             <p>Sí. Los casos se comparten con un enlace web al mismo tablero. Si tienes la app instalada, el enlace se abre directamente en el caso; si no, verás una página desde la que podrás intentarlo.</p>
           </details>
-          <details class="faq-item">
-            <summary>¿Dónde puedo reportar un fallo o una idea?</summary>
-            <p>Puedes abrir un aviso en el <a href="https://github.com/isMMa/michidoku-landingpage/issues" target="_blank" rel="noreferrer" style="color:var(--accent);font-weight:800">repositorio de la web</a>. Para fallos del juego, cuéntanos qué caso, qué gato y qué esperabas que pasara: nos ayuda a seguir las huellas.</p>
-          </details>
         </div>
       </div>
     </section>
@@ -602,11 +625,22 @@
         <div class="footer-brand">
           <a class="brand" href="#top" aria-label="Michidoku, volver arriba">
             <span class="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 48 48"><path d="M12 29c0-7 5.4-12 12-12s12 5 12 12-5.4 11-12 11-12-4-12-11Z" fill="#3A2114"/><path d="M12 21 9 8l10 6M36 21l3-13-10 6" fill="#3A2114"/><path d="M12 21 10 12l7 4M36 21l2-9-7 4" fill="#F08A9B"/><ellipse cx="19" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><ellipse cx="29" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><path d="M24 31.5 21.8 34h4.4L24 31.5Z" fill="#F08A9B"/><path d="M24 34v2m0 0c-1.5 1.6-3.4 1.3-4.2.4M24 36c1.5 1.6 3.4 1.3 4.2.4" fill="none" stroke="#FFF6E6" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <img src="assets/logo.png" alt="" width="40" height="40">
             </span>
             <span>Michidoku</span>
           </a>
           <p>Un juego de deducción gatuna hecho con cariño, muchas pistas y algún que otro ovillo roto.</p>
+          <svg class="footer-cookie" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Gato de Michidoku">
+            <path d="M490.036,373.97c0.012-0.222,0.035-0.456,0.035-0.69V145.848c0-11.862-4.616-23.011-12.995-31.367 c-8.391-8.368-19.517-12.984-31.355-12.984c-24.46,0-44.351,19.891-44.351,44.351v88.432L300.106,170.32 c5.843-16.455,8.952-33.739,8.952-50.965V24.273C309.058,10.892,298.166,0,284.785,0c-6.159,0-12.037,2.314-16.536,6.509 c-0.105,0.094-0.199,0.187-0.304,0.292l-41.405,41.406c-18.605-10.436-39.512-15.917-61.051-15.917 c-21.538,0-42.457,5.481-61.051,15.917L63.032,6.802c-0.105-0.105-0.199-0.199-0.304-0.292C58.229,2.314,52.351,0,46.192,0 C32.811,0,21.919,10.892,21.919,24.273v95.082c0,38.133,15.204,76.617,41.698,105.588c10.506,11.488,22.251,21.001,34.861,28.398 c-0.619,7.573-0.83,15.263-0.619,22.952c0.923,34.452,10.202,68.331,26.821,98.296v66.368h-0.444 c-19.587,0-35.527,15.929-35.527,35.515v13.077c0,12.376,10.074,22.45,22.438,22.45h60.49c15.228,0,28.223-9.77,33.05-23.373 h12.224v0.257c0,12.738,10.366,23.116,23.104,23.116h133.648c34.522,0,67.315-16.653,87.696-44.526 c0.012,0,0.012-0.012,0.012-0.012c2.185-2.968,4.254-6.124,6.159-9.396c0.035-0.047,0.058-0.093,0.094-0.14 c0.07-0.128,0.152-0.257,0.234-0.397C483.596,431.293,490.725,402.415,490.036,373.97z" fill="#F97316"/>
+            <path d="M490.036,373.97c0.012-0.222,0.035-0.456,0.035-0.69V145.848c0-11.862-4.616-23.011-12.995-31.367 c-8.391-8.368-19.517-12.984-31.355-12.984c-24.46,0-44.351,19.891-44.351,44.351v88.432L300.106,170.32 c5.843-16.455,8.952-33.739,8.952-50.965V24.273C309.058,10.892,298.166,0,284.785,0c-6.159,0-12.037,2.314-16.536,6.509 c-0.105,0.094-0.199,0.187-0.304,0.292l-41.405,41.406c-18.605-10.436-39.512-15.917-61.051-15.917 c-21.538,0-42.457,5.481-61.051,15.917L63.032,6.802c-0.105-0.105-0.199-0.199-0.304-0.292C58.229,2.314,52.351,0,46.192,0 C32.811,0,21.919,10.892,21.919,24.273v95.082c0,38.133,15.204,76.617,41.698,105.588c10.506,11.488,22.251,21.001,34.861,28.398 c-0.619,7.573-0.83,15.263-0.619,22.952c0.923,34.452,10.202,68.331,26.821,98.296v66.368h-0.444 c-19.587,0-35.527,15.929-35.527,35.515v13.077c0,12.376,10.074,22.45,22.438,22.45h60.49c15.228,0,28.223-9.77,33.05-23.373 h12.224v0.257c0,12.738,10.366,23.116,23.104,23.116h133.648c34.522,0,67.315-16.653,87.696-44.526 c0.012,0,0.012-0.012,0.012-0.012c2.185-2.968,4.254-6.124,6.159-9.396c0.035-0.047,0.058-0.093,0.094-0.14 c0.07-0.128,0.152-0.257,0.234-0.397C483.596,431.293,490.725,402.415,490.036,373.97z M80.854,209.166 c-2.419-2.653-4.721-5.399-6.918-8.227l8.449-0.713c6.428-0.549,11.207-6.206,10.658-12.633 c-0.538-6.439-6.194-11.207-12.633-10.658l-20.603,1.741c-2.115-4.16-3.997-8.426-5.668-12.762l25.734,3.412 c0.514,0.07,1.028,0.093,1.543,0.093c5.773,0,10.798-4.266,11.57-10.144c0.853-6.404-3.646-12.283-10.05-13.124l-35.656-4.733 c-1.297-7.304-1.987-14.69-1.987-22.064V24.273c0-0.491,0.409-0.9,0.9-0.9c0.082,0,0.304,0,0.538,0.175l47.693,47.705 c3.95,3.938,10.121,4.546,14.76,1.449c16.688-11.149,36.158-17.039,56.306-17.039c20.136,0,39.617,5.89,56.306,17.039 c4.64,3.097,10.81,2.489,14.76-1.449l47.693-47.705c0.234-0.175,0.456-0.175,0.538-0.175c0.491,0,0.9,0.409,0.9,0.9v95.082 c0,7.374-0.678,14.76-1.987,22.064l-35.667,4.733c-6.393,0.841-10.892,6.72-10.05,13.124c0.783,5.878,5.797,10.144,11.57,10.144 c0.514,0,1.028-0.035,1.554-0.094l25.734-3.412c-1.659,4.336-3.553,8.601-5.668,12.762l-20.615-1.741 c-6.439-0.549-12.084,4.219-12.633,10.658c-0.538,6.428,4.231,12.084,10.658,12.633l8.461,0.713 c-2.197,2.828-4.499,5.574-6.918,8.227c-23.174,25.325-53.232,39.267-84.634,39.267S104.029,234.491,80.854,209.166z M447.871,445.41l-5.539,8.484c-16.022,21.749-41.674,34.732-68.67,34.732H240.282V475c0-7.514,6.1-13.627,13.615-13.627h34.581 c4.125,0,7.935-2.174,10.05-5.726c2.104-3.541,2.185-7.935,0.21-11.558c-6.766-12.411-10.343-26.505-10.343-40.739 c0-47.027,38.25-85.277,85.265-85.277c6.451,0,11.687-5.236,11.687-11.687c0-6.463-5.236-11.687-11.687-11.687 c-59.905,0-108.638,48.733-108.638,108.65c0,11.803,1.928,23.525,5.656,34.651h-16.782c-17.027,0-31.39,11.57-35.679,27.253 h-11.523v-74.712c0-6.463-5.236-11.687-11.687-11.687c-6.463,0-11.687,5.224-11.687,11.687v86.399 c0,6.439-5.247,11.687-11.687,11.687h-59.555v-12.154c0-6.696,5.458-12.142,12.154-12.142h12.131 c6.451,0,11.687-5.236,11.687-11.687v-77.949c0.631-2.781,0.269-5.797-1.274-8.461c-15.87-27.405-24.705-58.725-25.547-90.571 c-0.105-3.88-0.082-7.76,0.047-11.616c14.164,5.107,29.041,7.76,44.21,7.76c38.051,0,74.221-16.642,101.872-46.863 c9.151-10.004,16.946-21.129,23.233-32.991l110.8,69.979C465.05,302.109,485.431,382.677,447.871,445.41z M466.698,295.413 L466.698,295.413c-10.6-17.284-24.67-32.898-41.955-45.765v-103.8c0-11.57,9.408-20.977,20.977-20.977 c5.598,0,10.868,2.185,14.842,6.147c3.95,3.95,6.135,9.221,6.135,14.83V295.413z" fill="none" stroke="#7C2D12" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M423.791,344.933c-0.729-0.191-1.481-0.313-2.246-0.359c-1.147-0.069-2.324,0.031-3.499,0.32 c-6.264,1.543-10.097,7.877-8.555,14.141c4.85,19.657,1.858,40.12-8.414,57.603c-3.272,5.563-1.414,12.727,4.16,15.987 c1.858,1.099,3.892,1.613,5.902,1.613c4.008,0,7.912-2.057,10.086-5.761c1.254-2.135,2.426-4.305,3.513-6.504 c1.087-2.199,2.09-4.429,3.009-6.684c0.612-1.503,1.187-3.018,1.724-4.544c2.417-6.864,4.068-13.936,4.939-21.109 c0.097-0.797,0.184-1.595,0.261-2.394c0.155-1.599,0.271-3.201,0.349-4.807c0.155-3.212,0.155-6.436-0.002-9.664 c-0.078-1.614-0.196-3.228-0.353-4.842c-0.235-2.421-0.559-4.841-0.972-7.255c-0.275-1.61-0.59-3.217-0.945-4.821 c-0.177-0.802-0.365-1.603-0.562-2.403c-0.328-1.332-0.883-2.545-1.598-3.629c-0.336-0.509-0.698-0.996-1.104-1.441 c-0.254-0.279-0.521-0.544-0.799-0.796c-0.445-0.402-0.926-0.758-1.425-1.087C426.199,345.795,425.031,345.258,423.791,344.933z" fill="#C2410C"/>
+            <path d="M432.187,353.448c-1.543-6.264-7.877-10.097-14.141-8.555c-6.264,1.543-10.097,7.877-8.555,14.141 c4.85,19.657,1.858,40.12-8.414,57.603c-3.272,5.563-1.414,12.727,4.16,15.987c1.858,1.099,3.892,1.613,5.902,1.613 c4.008,0,7.912-2.057,10.086-5.761C434.606,405.699,438.498,379.054,432.187,353.448z" fill="#C2410C"/>
+            <path d="M199.706,166.954c-2.863-5.06-9.291-6.825-14.339-3.95c-1.017,0.573-2.676,1.18-4.78,0.736 c-2.384-0.503-4.347-2.255-5.095-4.569l-0.012,0.012c-1.017-3.085-3.412-5.656-6.72-6.743c-5.528-1.8-11.465,1.215-13.264,6.731 c-0.76,2.314-2.711,4.067-5.107,4.569c-2.092,0.444-3.751-0.164-4.78-0.736c-5.049-2.875-11.464-1.11-14.339,3.95 c-2.863,5.049-1.099,11.465,3.95,14.339c4.219,2.396,8.964,3.635,13.755,3.635c1.905,0,3.833-0.199,5.738-0.596 c3.95-0.83,7.608-2.513,10.763-4.838c3.167,2.326,6.837,4.008,10.798,4.838c1.893,0.397,3.822,0.596,5.738,0.596 c4.78,0,9.525-1.239,13.743-3.635C200.805,178.419,202.581,172.003,199.706,166.954z" fill="#3A2114"/>
+            <circle cx="93.001" cy="122.066" r="11.429" fill="#3A2114"/>
+            <circle cx="237.985" cy="122.066" r="11.429" fill="#3A2114"/>
+            <circle cx="89.5" cy="118.5" r="3.8" fill="#FFFFFF"/>
+            <circle cx="234.5" cy="118.5" r="3.8" fill="#FFFFFF"/>
+          </svg>
         </div>
         <div class="footer-col">
           <h4>El juego</h4>

@@ -21,7 +21,7 @@
         try {
           var params = new URLSearchParams(location.search);
           var tema = params.get('tema');
-          if (tema !== 'claro' && tema !== 'noche') tema = localStorage.getItem('michidoku-tema');
+          if (tema !== 'claro' && tema !== 'noche') tema = localStorage.getItem('michidoku-theme');
           if (tema !== 'claro' && tema !== 'noche') {
             tema = window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noche';
           }
