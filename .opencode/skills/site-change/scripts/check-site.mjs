@@ -77,7 +77,7 @@ for (const file of htmlPages) {
   if (!html.includes('michidoku-theme')) fail(`${file}: missing michidoku-theme boot script`);
   if (html.includes('michidoku-tema')) fail(`${file}: stale michidoku-tema storage key`);
   if (!/rel="manifest"/.test(html)) fail(`${file}: missing <link rel="manifest">`);
-  if (!/src="(\/|\.\.\/)?pwa\.js"/.test(html)) fail(`${file}: missing pwa.js service worker registration`);
+  if (!/src="(\/|\.\.\/)?pwa\.js(\?[^"]*)?"/.test(html)) fail(`${file}: missing pwa.js service worker registration`);
 }
 
 const index = read('index.html');
@@ -135,7 +135,8 @@ if (!sw.includes("'/offline.html'") && !sw.includes('OFFLINE_URL')) {
   fail('sw.js: expected an offline.html fallback');
 }
 for (const asset of ['/styles.css', '/app.js', '/cats.js', '/pwa.js', '/offline.html']) {
-  if (!sw.includes(`'${asset}'`)) fail(`sw.js: ${asset} missing from precache list`);
+  const conConsulta = new RegExp(`'${asset.replace(/\./g, '\\.')}(\\?[^']*)?'`);
+  if (!conConsulta.test(sw)) fail(`sw.js: ${asset} missing from precache list`);
 }
 
 const cname = read('CNAME').trim();
