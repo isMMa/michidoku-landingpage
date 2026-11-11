@@ -42,18 +42,16 @@
   }
 
   /**
-   * Monta los buzones en tiempo de ejecución: el HTML solo contiene
-   * "contact [at] devcodelight [dot] com" para que los bots de spam no
-   * encuentren una dirección lista para cosechar.
+   * Buzón de contacto. Se compone aquí, en JavaScript, y nunca aparece escrito
+   * en el HTML: así los bots de spam no encuentran una dirección lista para
+   * cosechar. El HTML solo contiene un texto de relleno que se sustituye.
    */
+  var CORREO = 'contact' + '@' + 'devcodelight.com';
+
   function montarCorreos() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-correo]'), function (nodo) {
-      var usuario = nodo.getAttribute('data-usuario');
-      var dominio = nodo.getAttribute('data-dominio');
-      if (!usuario || !dominio) return;
-      var correo = usuario + '@' + dominio;
-      nodo.textContent = correo;
-      nodo.setAttribute('href', 'mailto:' + correo);
+      nodo.textContent = CORREO;
+      nodo.setAttribute('href', 'mailto:' + CORREO);
       nodo.classList.add('correo');
     });
   }
