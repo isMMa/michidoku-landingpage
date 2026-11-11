@@ -213,10 +213,10 @@
       paw.style.left = (startX + (endX - startX) * t - Math.sin(angle) * side * stagger).toFixed(1) + 'px';
       paw.style.top = (startY + (endY - startY) * t + Math.cos(angle) * side * stagger).toFixed(1) + 'px';
       paw.style.setProperty('--paw-size', randomBetween(18, 27).toFixed(1) + 'px');
-      paw.style.setProperty('--paw-ink', 0.9);
-      paw.style.setProperty('--paw-angle', ((angle + side * 0.18) * 180 / Math.PI).toFixed(1) + 'deg');
+      paw.style.setProperty('--paw-ink', randomBetween(0.16, 0.3).toFixed(2));
+      paw.style.setProperty('--paw-angle', ((angle + Math.PI / 2 + side * 0.16) * 180 / Math.PI).toFixed(1) + 'deg');
       paw.style.setProperty('--paw-delay', lastDelay.toFixed(2) + 's');
-      paw.style.setProperty('--paw-life', 60 + 's');
+      paw.style.setProperty('--paw-life', randomBetween(3.1, 4.2).toFixed(2) + 's');
       paw.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + PAW_SHAPE + '</svg>';
       pawTrail.appendChild(paw);
     }
@@ -224,7 +224,7 @@
     schedulePawWalk((lastDelay + 4.2) * 1000 + randomBetween(8000, 19000));
   }
 
-  if (!prefersReduced) schedulePawWalk(0);
+  if (!prefersReduced) schedulePawWalk(randomBetween(3500, 7000));
 
   /* ---------------------------------------------------------------------- */
   /* Escenario del hero                                                      */
