@@ -11,7 +11,10 @@ Static, dependency-free landing page for **Michidoku**, published to GitHub Page
 python -m http.server 8080
 
 # Fast syntax check after editing JS
-node --check app.js && node --check cats.js && node --check caso/caso.js && node --check legal.js
+node --check app.js && node --check cats.js && node --check caso/caso.js && node --check legal.js && node --check sw.js && node --check pwa.js
+
+# Structural checks (manifest, icons, theme boot, sitemap, PWA wiring)
+node .opencode/skills/site-change/scripts/check-site.mjs
 ```
 
 Manual browser checks are the real verification. Exercise `/`, `/caso/?size=6&seed=123`, `/privacidad/`, `/terminos/`, `/404.html`, theme toggle, mobile nav, and the cat generator. Do not use `file://`; `/caso` and `/404.html` rely on server routing/root-absolute paths.
@@ -24,6 +27,7 @@ Deployment is automatic: push to `main` runs `.github/workflows/deploy.yml` (`rs
 - `cats.js`: shared deterministic cat-DNA/SVG generator, exposed as `window.MichidokuCats` and also `module.exports`. Load it before `app.js` / `caso/caso.js`; `404.html` loads it synchronously.
 - `caso/`: shared-case fallback. Reads `?size=` and `?seed=`, then tries `michidoku://caso?...`.
 - `privacidad/`, `terminos/`: legal pages using `legal.css` + `legal.js`; `privacidad.html` is a redirect kept for old links.
+- `manifest.webmanifest` + `sw.js` + `pwa.js` + `offline.html`: PWA. `pwa.js` is registered on every page (resolve `sw.js` from its own URL); `sw.js` precaches the app shell and falls back to `offline.html`. Icons live in `assets/` (`icon-192`, `icon-512`, `icon-maskable-*`, `apple-touch-icon`).
 - No templating or partials: header/footer/brand markup and page metadata are duplicated per HTML file. Update every affected page, including `404.html`, when changing shared navigation or branding.
 - Subdirectory pages use `../` paths; `404.html` uses root-absolute paths (it can be served from any missing URL).
 
@@ -35,4 +39,5 @@ Deployment is automatic: push to `main` runs `.github/workflows/deploy.yml` (`rs
 - **Case-link contract:** `size` must be `4`, `6`, or `8`; `seed` is a non-negative safe integer written as 1–16 digits. Deep link format: `michidoku://caso?size=<size>&seed=<seed>`. Keep validation in `caso/caso.js` aligned with the app.
 - **App links are launch-sensitive:** Android uses `.well-known/assetlinks.json` (replace the SHA-256 fingerprint with the production keystore); iOS currently has only `.well-known/apple-app-site-association.example` and needs the real Team ID file. Store buttons on `index.html` are still “Muy pronto” placeholders.
 - Respect `prefers-reduced-motion`: animations are disabled/reduced in both CSS files, and `app.js` skips particles/reveal/tilt effects when reduced motion is requested.
+- **PWA:** `sw.js` precaches the app shell; bump `VERSION` in `sw.js` whenever a shell file changes (`styles.css`, `app.js`, `cats.js`, HTML, icons) or clients keep stale assets. `pwa.js` only registers on `https:`/`localhost`, so `file://` and plain HTTP without localhost skip it. `manifest.webmanifest` must keep `start_url`/`scope` at `/` and include 192/512 icons for both `any` and `maskable`; `offline.html` is the offline fallback and stays self-contained (no external fonts/CSS). `pwa.js` must be loaded on every page, including `404.html`.
 - `/caso/` is `noindex, follow` and intentionally absent from `sitemap.xml`. If adding an indexable public page, update `sitemap.xml` (and `robots.txt` only if crawl rules change).

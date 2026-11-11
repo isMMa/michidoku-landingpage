@@ -41,7 +41,25 @@
     } catch (error) {}
   }
 
+  /**
+   * Monta los buzones en tiempo de ejecución: el HTML solo contiene
+   * "contact [at] devcodelight [dot] com" para que los bots de spam no
+   * encuentren una dirección lista para cosechar.
+   */
+  function montarCorreos() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-correo]'), function (nodo) {
+      var usuario = nodo.getAttribute('data-usuario');
+      var dominio = nodo.getAttribute('data-dominio');
+      if (!usuario || !dominio) return;
+      var correo = usuario + '@' + dominio;
+      nodo.textContent = correo;
+      nodo.setAttribute('href', 'mailto:' + correo);
+      nodo.classList.add('correo');
+    });
+  }
+
   function iniciar() {
+    montarCorreos();
     Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (boton) {
       boton.addEventListener('click', function () {
         aplicar(boton.getAttribute('data-lang'));

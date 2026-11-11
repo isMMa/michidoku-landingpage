@@ -70,6 +70,24 @@ También puedes usar `npx serve .` si prefieres Node. No abras `index.html` con 
 
 ---
 
+## PWA (instalable y offline)
+
+El sitio es una Progressive Web App sin build:
+
+- `manifest.webmanifest` declara nombre, `start_url`, `display: standalone` e iconos 192/512 `any` y `maskable`.
+- `pwa.js` registra `sw.js` en todas las páginas (solo en `https:` o `localhost`).
+- `sw.js` precachea el app-shell (`/`, `/caso/`, legales, CSS, JS, iconos) al instalar.
+  - Navegaciones: red primero y, si falla, copia cacheada; si no hay copia, `offline.html`.
+  - CSS/JS/iconos: caché primero con refresco en segundo plano.
+  - Fuentes de Google: caché aparte, también con refresco en segundo plano.
+- `offline.html` es autónoma (CSS y fuentes del sistema, sin dependencias de red).
+
+**Al cambiar cualquier archivo del app-shell** (`styles.css`, `app.js`, `cats.js`, HTML, iconos), sube `VERSION` en `sw.js`. La versión nueva instala su propia caché, `activate` borra las anteriores y el cliente la activa en la siguiente carga.
+
+Prueba la PWA en local con `python -m http.server 8080`: en Chrome, DevTools → Application → Manifest / Service Workers, y marca *Offline* para ver el fallback. En iOS, “Compartir → Añadir a pantalla de inicio”; el modo standalone depende de `apple-mobile-web-app-capable` porque iOS no usa el manifiesto.
+
+---
+
 ## Publicar en GitHub Pages
 
 1. Sube el contenido a la rama `main` del repositorio `isMMa/michidoku-landingpage`.

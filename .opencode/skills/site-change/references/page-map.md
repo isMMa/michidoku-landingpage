@@ -2,11 +2,12 @@
 
 | Route / file | Language | Scripts | Theme boot | CSS |
 | --- | --- | --- | --- | --- |
-| `/` `index.html` | Spanish | `cats.js` → `app.js` (`defer`) | localStorage only | `styles.css` |
-| `/caso/` `caso/index.html` + `caso/caso.js` | ES/EN | `../cats.js` → `caso.js` (`defer`) | localStorage, `?tema=claro\|noche`, OS preference | `styles.css`, `legal.css` |
-| `/privacidad/` `privacidad/index.html` | ES/EN | `../legal.js` (`defer`) | localStorage, `?tema=claro\|noche`, OS preference | `styles.css`, `legal.css` |
-| `/terminos/` `terminos/index.html` | ES/EN | `../legal.js` (`defer`) | localStorage, `?tema=claro\|noche`, OS preference | `styles.css`, `legal.css` |
-| `/404.html` `404.html` | Spanish | `/cats.js` (synchronous) + inline render | localStorage only | `styles.css` |
+| `/` `index.html` | Spanish | `cats.js` → `app.js` → `pwa.js` (`defer`) | localStorage only | `styles.css` |
+| `/caso/` `caso/index.html` + `caso/caso.js` | ES/EN | `../cats.js` → `caso.js` → `../pwa.js` (`defer`) | localStorage, `?tema=claro\|noche`, OS preference | `styles.css`, `legal.css` |
+| `/privacidad/` `privacidad/index.html` | ES/EN | `../legal.js` → `../pwa.js` (`defer`) | localStorage, `?tema=claro\|noche`, OS preference | `styles.css`, `legal.css` |
+| `/terminos/` `terminos/index.html` | ES/EN | `../legal.js` → `../pwa.js` (`defer`) | localStorage, `?tema=claro\|noche`, OS preference | `styles.css`, `legal.css` |
+| `/404.html` `404.html` | Spanish | `/cats.js` (synchronous) + inline render, `/pwa.js` (`defer`) | localStorage only | `styles.css` |
+| `/offline.html` `offline.html` | Spanish | none (self-contained) | localStorage only | inline |
 | `/privacidad.html` | — | inline redirect to `privacidad/` | — | — |
 
 ## Shared markup

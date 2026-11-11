@@ -239,6 +239,14 @@
   text-decoration-color: var(--accent);
 }
 
+/* Antes de que legal.js monte el mailto, el buzón ofuscado no debe parecer un
+   enlace roto. Sin JavaScript queda como texto plano legible. */
+.doc-prose a[data-correo]:not([href]) {
+  color: inherit;
+  text-decoration: none;
+  cursor: text;
+}
+
 .doc-note {
   padding: 16px 18px;
   border-radius: var(--radius-md);
