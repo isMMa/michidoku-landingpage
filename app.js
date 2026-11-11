@@ -260,7 +260,7 @@
 
   if (heroCatHost) renderHero('Misi');
   if (heroCatHost) {
-    heroCatHost.addEventListener('click', function () { sonar('toque'); });
+    heroCatHost.addEventListener('click', function () { sonar('seleccion'); });
   }
   if (heroRandom) {
     heroRandom.addEventListener('click', function () {
@@ -424,7 +424,7 @@
       cat.addEventListener('focus', function () { paintActive(cat.dataset.cat); });
       cat.addEventListener('blur', function () { paintActive(pinned); });
       cat.addEventListener('click', function () {
-        sonar('toque');
+        sonar('seleccion');
         pinned = pinned === cat.dataset.cat ? null : cat.dataset.cat;
         paintActive(pinned);
       });
@@ -507,7 +507,7 @@
     $$('.gallery-cat', galleryHost).forEach(function (item) {
       item.classList.toggle('is-active', item.dataset.name === currentName);
       item.addEventListener('click', function () {
-        sonar('toque');
+        sonar('seleccion');
         if (nameInput) nameInput.value = item.dataset.name;
         renderPreview(item.dataset.name);
       });
@@ -618,7 +618,7 @@
       size: 440,
       label: 'El legendario gato dorado con corona',
     });
-    goldenHost.addEventListener('click', function () { sonar('toque'); });
+    goldenHost.addEventListener('click', function () { sonar('seleccion'); });
   }
 
   var ctaCats = $('#cta-cats');
@@ -633,7 +633,7 @@
         label: 'Michi ' + name,
       });
       ctaCats.appendChild(wrapper.firstElementChild);
-      wrapper.firstElementChild.addEventListener('click', function () { sonar('toque'); });
+      wrapper.firstElementChild.addEventListener('click', function () { sonar('seleccion'); });
     });
   }
 

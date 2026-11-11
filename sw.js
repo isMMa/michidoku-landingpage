@@ -3,22 +3,22 @@
    Al cambiar los archivos del shell, sube VERSION para invalidar la caché. */
 'use strict';
 
-var VERSION = 'v7';
+var VERSION = 'v8';
 var SHELL_CACHE = 'michidoku-shell-' + VERSION;
 var PAGE_CACHE = 'michidoku-pages-' + VERSION;
 var FONT_CACHE = 'michidoku-fonts-' + VERSION;
 var OFFLINE_URL = '/offline.html';
 var PRECACHE_URLS = [
   '/',
-  '/styles.css?v=7',
-  '/app.js?v=7',
-  '/cats.js?v=7',
-  '/sonidos.js?v=7',
+  '/styles.css?v=8',
+  '/app.js?v=8',
+  '/cats.js?v=8',
+  '/sonidos.js?v=8',
   '/assets/sonidos/toque.wav',
   '/assets/sonidos/seleccion.wav',
   '/assets/sonidos/exito.wav',
   '/assets/sonidos/aviso.wav',
-  '/pwa.js?v=7',
+  '/pwa.js?v=8',
   '/manifest.webmanifest',
   OFFLINE_URL,
   '/assets/michidoku-icon.svg',
@@ -27,11 +27,11 @@ var PRECACHE_URLS = [
   '/assets/icon-512.png',
   '/assets/apple-touch-icon.png',
   '/caso/',
-  '/caso/caso.js?v=7',
+  '/caso/caso.js?v=8',
   '/privacidad/',
   '/terminos/',
-  '/legal.css?v=7',
-  '/legal.js?v=7'
+  '/legal.css?v=8',
+  '/legal.js?v=8'
 ];
 
 self.addEventListener('install', function (event) {
