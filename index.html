@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="es" data-theme="noche">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Michidoku · El juego de deducción gatuna</title>
+  <meta name="description" content="Sigue las pistas, coloca a cada michi y descubre quién rompió el ovillo. Michidoku es un juego de deducción con gatos únicos, casos diarios, modo historia y un legendario gato dorado. Muy pronto en Android e iOS.">
+  <link rel="canonical" href="https://michidoku.devcodelight.com/">
+  <meta name="theme-color" content="#080b16">
+  <meta name="color-scheme" content="dark light">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Michidoku">
+  <meta property="og:title" content="Michidoku · ¿Quién rompió el ovillo?">
+  <meta property="og:description" content="Un juego de deducción gatuna. Sigue las pistas, coloca a cada michi y encuentra al travieso. Conoce a los gatos, el modo historia y el legendario gato dorado.">
+  <meta property="og:url" content="https://michidoku.devcodelight.com/">
+  <meta property="og:image" content="https://michidoku.devcodelight.com/assets/icon.png">
+  <meta property="og:image:alt" content="Icono de Michidoku: una ficha ámbar con la cara de un michi crema.">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Michidoku · ¿Quién rompió el ovillo?">
+  <meta name="twitter:description" content="Un juego de deducción gatuna con casos diarios, historia y un legendario gato dorado.">
+  <meta name="twitter:image" content="https://michidoku.devcodelight.com/assets/icon.png">
+
+  <link rel="icon" href="assets/michidoku-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800;6..12,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('michidoku-theme');
+        if (saved === 'claro' || saved === 'noche') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (error) { /* almacenamiento no disponible */ }
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Michidoku",
+    "alternateName": "Michidoku Cat Game",
+    "description": "Juego de deducción gatuna: sigue las pistas, coloca a los gatos en la casa y descubre al travieso que rompió el ovillo.",
+    "url": "https://michidoku.devcodelight.com/",
+    "image": "https://michidoku.devcodelight.com/assets/icon.png",
+    "inLanguage": ["es", "en"],
+    "genre": ["Puzzle", "Deducción", "Lógica"],
+    "applicationCategory": "Game",
+    "gamePlatform": ["Android", "iOS"],
+    "operatingSystem": "Android, iOS",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "publisher": { "@type": "Organization", "name": "DevCodeLight", "url": "https://devcodelight.com" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- Sprite de iconos -->
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="i-paw" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="16.2" rx="5.1" ry="4.3" fill="currentColor"/>
+      <ellipse cx="5.3" cy="10.6" rx="2.35" ry="3" fill="currentColor" transform="rotate(-20 5.3 10.6)"/>
+      <ellipse cx="9.4" cy="6.6" rx="2.2" ry="2.9" fill="currentColor"/>
+      <ellipse cx="14.6" cy="6.6" rx="2.2" ry="2.9" fill="currentColor"/>
+      <ellipse cx="18.7" cy="10.6" rx="2.35" ry="3" fill="currentColor" transform="rotate(20 18.7 10.6)"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.4v13.2L19 12 8 5.4Z" fill="currentColor"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.6 2.92 5.92 6.53.95-4.72 4.6 1.11 6.5L12 17.5l-5.84 3.07 1.11-6.5-4.72-4.6 6.53-.95L12 2.6Z" fill="currentColor"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.5 14.2 9.8 21.5 12l-7.3 2.2L12 21.5l-2.2-7.3L2.5 12l7.3-2.2L12 2.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="14" r="1.4" fill="currentColor"/><circle cx="12" cy="14" r="1.4" fill="currentColor"/><circle cx="16" cy="14" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2c2.6-1 5.2-1 8 .6v14c-2.8-1.6-5.4-1.6-8-.6v-14Zm16 0c-2.6-1-5.2-1-8 .6v14c2.8-1.6 5.4-1.6 8-.6v-14Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-yarn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.2 8.5c5 1 9.5 4.5 11 9.2M8.5 4.9c2.7 4.3 6.2 7 11 8.4M4.5 14.3c3.4.2 6.4 1.8 8.4 4.5M15.6 5.1c.2 3.4 1.4 6.3 3.6 8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><path d="M17.4 19.2c2.2.2 3.4 1.3 3.6 2.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2.8 8.5 4.6v9.2L12 21.2 3.5 16.6V7.4L12 2.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.8 7.6 12 12l8.2-4.4M12 12v9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sofa" viewBox="0 0 24 24"><path d="M5 11V7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5V11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3.5 12.5a2 2 0 0 1 4 0V15h9v-2.5a2 2 0 0 1 4 0V18a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 18v-5.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 19.5V21M18 19.5V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bowl" viewBox="0 0 24 24"><path d="M3.5 11h17c0 4.7-3.8 8.5-8.5 8.5S3.5 15.7 3.5 11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><ellipse cx="12" cy="10.8" rx="6" ry="2.2" fill="currentColor" opacity=".22"/><path d="M8 6.2c.8-1 1.8-1.5 3-1.5M14 6.2c.8-1 1.8-1.5 3-1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".7"/></symbol>
+    <symbol id="i-plant" viewBox="0 0 24 24"><path d="M8 13h8l-1.2 7H9.2L8 13Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 13V8m0 1c-3.7 0-6-2.2-6-5 3.7 0 6 2.2 6 5Zm0-2c3-1 4.6-3.4 4.4-6.2C13.4 6 11.9 8.3 12 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-litter" viewBox="0 0 24 24"><path d="M4 10.5h16l-1.6 8H5.6L4 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 10.5 7 7h10l1 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 13.5h.01M13 15h.01M16 13.2h.01M11 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-scratcher" viewBox="0 0 24 24"><path d="M9 4h6v15H9V4Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 7h6M9 10h6M9 13h6M9 16h6" stroke="currentColor" stroke-width="1.2" opacity=".6"/><path d="M5 19h14v2H5v-2Z" fill="currentColor" opacity=".5"/><circle cx="12" cy="4" r="2.2" fill="currentColor" opacity=".45"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.3" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.6A8.5 8.5 0 0 1 9.4 4 8.5 8.5 0 1 0 20 14.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.3 15.3 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.8" fill="currentColor"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.4 12h17.2M12 3.2c2.3 2.4 3.5 5.4 3.5 8.8S14.3 18.4 12 20.8c-2.3-2.4-3.5-5.4-3.5-8.8S9.7 5.6 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18.5V6l10-2v12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><ellipse cx="6.5" cy="18.5" rx="2.5" ry="2.1" fill="currentColor"/><ellipse cx="16.5" cy="16.5" rx="2.5" ry="2.1" fill="currentColor"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.6-.2.6-.5v-1.8c-2.6.6-3.2-1.1-3.2-1.1-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.1-.2-4.3-1-4.3-4.6 0-1 .4-1.9 1-2.6-.1-.2-.4-1.2.1-2.6 0 0 .8-.2 2.6 1a9 9 0 0 1 4.7 0c1.8-1.2 2.6-1 2.6-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.6 0 3.6-2.2 4.4-4.3 4.6.4.3.7.9.7 1.9v2.7c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24"><path d="M6.5 9h11v7.5a1.5 1.5 0 0 1-1.5 1.5h-1v2h-1.8v-2H10.8v2H9v-2H8a1.5 1.5 0 0 1-1.5-1.5V9Zm-2 0A1.5 1.5 0 0 1 6 10.5v4a1.5 1.5 0 0 1-3 0v-4A1.5 1.5 0 0 1 4.5 9Zm15 0a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-3 0v-4A1.5 1.5 0 0 1 19.5 9ZM8.4 3.2 9.5 5a6.8 6.8 0 0 1 5 0l1.1-1.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.4" cy="7" r=".8" fill="currentColor"/><circle cx="14.6" cy="7" r=".8" fill="currentColor"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M16.4 12.7c0-2.1 1.7-3.1 1.8-3.2a4 4 0 0 0-3.1-1.7c-1.3-.1-2.6.8-3.2.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.8.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.3ZM14.2 6.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2Z" fill="currentColor"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.5 2.8c0 5.8-8.5 10.9-8.5 10.9Z" fill="currentColor"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5.5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 19c0-3.2 2.7-5.5 6-5.5s6 2.3 6 5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M15.5 5.2a3.2 3.2 0 0 1 0 5.6M17.5 13.9c2.1.6 3.5 2.3 3.5 4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Michidoku, volver arriba">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M12 29c0-7 5.4-12 12-12s12 5 12 12-5.4 11-12 11-12-4-12-11Z" fill="#3A2114"/><path d="M12 21 9 8l10 6M36 21l3-13-10 6" fill="#3A2114"/><path d="M12 21 10 12l7 4M36 21l2-9-7 4" fill="#F08A9B"/><ellipse cx="19" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><ellipse cx="29" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><path d="M24 31.5 21.8 34h4.4L24 31.5Z" fill="#F08A9B"/><path d="M24 34v2m0 0c-1.5 1.6-3.4 1.3-4.2.4M24 36c1.5 1.6 3.4 1.3 4.2.4" fill="none" stroke="#FFF6E6" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </span>
+        <span>Michidoku</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <a href="#el-caso">El caso</a>
+        <a href="#como-jugar">Cómo jugar</a>
+        <a href="#michis">Los michis</a>
+        <a href="#modos">Modos</a>
+        <a href="#faq">Preguntas</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Cambiar entre tema día y noche" title="Cambiar tema">
+          <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <a class="btn btn--small" href="#descargar">
+          <svg aria-hidden="true"><use href="#i-paw"/></svg>
+          Muy pronto
+        </a>
+        <button class="icon-btn nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+          <svg class="icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="icon-close" aria-hidden="true" style="display:none"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="particles" id="hero-particles" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="hero-badge"><span class="pulse-dot" aria-hidden="true"></span> En desarrollo · <b>Muy pronto</b></span>
+            <h1 id="hero-title">
+              <span class="line line--small">Un misterio gatuno</span>
+              <span class="line">¿Quién rompió</span>
+              <span class="line gradient-text">el ovillo?</span>
+            </h1>
+            <p class="lead">Michidoku es un juego de deducción para amantes de los gatos. Sigue las pistas, coloca a cada michi en su casilla y descubre al único travieso que se quedó en la habitación del ovillo.</p>
+            <div class="hero-ctas">
+              <a class="btn" href="#michis">
+                <svg aria-hidden="true"><use href="#i-paw"/></svg>
+                Conoce a los michis
+              </a>
+              <a class="btn btn--ghost" href="#el-caso">
+                <svg aria-hidden="true"><use href="#i-grid"/></svg>
+                Ver un caso
+              </a>
+            </div>
+            <div class="hero-meta">
+              <span><svg aria-hidden="true"><use href="#i-grid"/></svg> 6 habitaciones</span>
+              <span><svg aria-hidden="true"><use href="#i-book"/></svg> 20 niveles de historia</span>
+              <span><svg aria-hidden="true"><use href="#i-star"/></svg> Gato dorado x2</span>
+              <span><svg aria-hidden="true"><use href="#i-globe"/></svg> ES · EN</span>
+            </div>
+          </div>
+
+          <div class="hero-stage-wrap">
+            <div class="hero-stage" id="hero-stage">
+              <div class="stage-topline">
+                <span class="stage-status"><i aria-hidden="true"></i> Michi del día</span>
+                <span>Expediente #001</span>
+              </div>
+              <div class="stage-paws" aria-hidden="true">
+                <svg><use href="#i-paw"/></svg>
+                <svg><use href="#i-paw"/></svg>
+                <svg><use href="#i-paw"/></svg>
+              </div>
+              <div class="stage-cat" id="hero-cat" aria-live="polite"></div>
+              <div class="stage-card stage-clue">
+                <small>Pista de Misi</small>
+                <strong>“Dormía dentro de la caja”</strong>
+              </div>
+              <div class="stage-card stage-score">
+                <small>Caso resuelto</small>
+                <strong><svg aria-hidden="true"><use href="#i-star"/></svg> +1.250 pts</strong>
+              </div>
+              <button class="stage-random" type="button" id="hero-random" aria-label="Generar otro michi">
+                <svg aria-hidden="true"><use href="#i-dice"/></svg>
+                Otro michi
+              </button>
+              <div class="stage-name"><span class="dot" aria-hidden="true"></span><span id="hero-cat-name">Michi</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span><svg><use href="#i-paw"/></svg> Sigue las huellas</span>
+        <span><svg><use href="#i-paw"/></svg> Descarta sospechosos</span>
+        <span><svg><use href="#i-paw"/></svg> Solo un gato es el travieso</span>
+        <span><svg><use href="#i-paw"/></svg> Mira las filas y columnas</span>
+        <span><svg><use href="#i-paw"/></svg> Un caso nuevo cada día</span>
+        <span><svg><use href="#i-paw"/></svg> Sigue las huellas</span>
+        <span><svg><use href="#i-paw"/></svg> Descarta sospechosos</span>
+        <span><svg><use href="#i-paw"/></svg> Solo un gato es el travieso</span>
+        <span><svg><use href="#i-paw"/></svg> Mira las filas y columnas</span>
+        <span><svg><use href="#i-paw"/></svg> Un caso nuevo cada día</span>
+      </div>
+    </div>
+
+    <!-- El caso -->
+    <section class="section" id="el-caso" aria-labelledby="caso-title">
+      <div class="container">
+        <div class="case-layout">
+          <div class="house-frame reveal" id="case-frame">
+            <div class="house" id="case-board" role="img" aria-label="Casa de ejemplo con tres gatos, muebles y un ovillo roto en el baño"></div>
+          </div>
+
+          <div class="reveal reveal-delay-1">
+            <span class="eyebrow">Un caso, una casa</span>
+            <h2 id="caso-title" style="margin:16px 0 18px">Sigue las huellas.<br>Descarta sospechosos.</h2>
+            <p class="lead">Cada caso es una casa llena de habitaciones, muebles y gatos con coartada. Las pistas son indirectas: territorio, distancias, direcciones y objetos. Ninguna acusa directamente, así que hay que leer la casa entera.</p>
+
+            <div class="clue-list" aria-label="Pistas del caso de ejemplo">
+              <button class="clue" type="button" data-cat="Misi">
+                <span class="clue-icon"><svg aria-hidden="true"><use href="#i-box"/></svg></span>
+                <span><strong>“Dormía dentro de la caja”</strong><small>Pista de Misi · mueble</small></span>
+              </button>
+              <button class="clue" type="button" data-cat="Luna">
+                <span class="clue-icon"><svg aria-hidden="true"><use href="#i-scratcher"/></svg></span>
+                <span><strong>“Se sentó en el rascador”</strong><small>Pista de Luna · mueble</small></span>
+              </button>
+              <button class="clue" type="button" data-cat="Tom">
+                <span class="clue-icon"><svg aria-hidden="true"><use href="#i-paw"/></svg></span>
+                <span><strong>“No pisó la terraza”</strong><small>Pista de Tom · territorio</small></span>
+              </button>
+            </div>
+
+            <p class="case-note">
+              <svg aria-hidden="true"><use href="#i-yarn"/></svg>
+              <span>El ovillo roto está en el <strong>baño</strong>. Solo un gato se quedó en esa habitación: ese es el travieso. Pasa el cursor por las pistas para señalar a cada michi.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo jugar -->
+    <section class="section" id="como-jugar" aria-labelledby="como-title" style="padding-top:0">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Fácil de aprender, difícil de dejar</span>
+          <h2 id="como-title">Cuatro pasos y un culpable</h2>
+          <p>No hace falta ser un experto en sudokus. Solo hay que observar, cruzar pistas y confiar en el instinto felino.</p>
+        </div>
+        <div class="steps">
+          <article class="step reveal">
+            <div class="step-icon"><svg aria-hidden="true"><use href="#i-search"/></svg></div>
+            <h3>Lee las pistas</h3>
+            <p>Territorio, mueble, distancia o dirección. Cada frase descarta posiciones y acerca al travieso.</p>
+          </article>
+          <article class="step reveal reveal-delay-1">
+            <div class="step-icon"><svg aria-hidden="true"><use href="#i-paw"/></svg></div>
+            <h3>Coloca a los gatos</h3>
+            <p>Un gato por fila y por columna. La caja es la única excepción: el que duerme dentro no bloquea el olor.</p>
+          </article>
+          <article class="step reveal reveal-delay-2">
+            <div class="step-icon"><svg aria-hidden="true"><use href="#i-plant"/></svg></div>
+            <h3>Respeta la casa</h3>
+            <p>Cada mueble importa. La planta no se puede ocupar; solo rodear. El arenero, el sofá y el rascador sí.</p>
+          </article>
+          <article class="step reveal reveal-delay-3">
+            <div class="step-icon"><svg aria-hidden="true"><use href="#i-star"/></svg></div>
+            <h3>Acusa al travieso</h3>
+            <p>El culpable es el único gato que se quedó en la habitación del ovillo. Si aciertas, caso resuelto.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Generador de michis -->
+    <section class="section cats-section" id="michis" aria-labelledby="michis-title">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">ADN felino · mismo nombre, mismo michi</span>
+          <h2 id="michis-title">Cada michi es único</h2>
+          <p>Escribe un nombre y el juego le sortea pelaje, orejas, mirada, carácter y accesorio. Es determinista: si vuelves a escribir el mismo nombre, el michi será exactamente el mismo. Pruébalo.</p>
+        </div>
+
+        <div class="cat-lab">
+          <div class="cat-preview reveal" id="cat-preview-card">
+            <span class="cat-preview-label"><i aria-hidden="true"></i> Vista previa</span>
+            <div class="cat-preview-mount" id="cat-preview" aria-live="polite"></div>
+            <div class="cat-preview-name" id="cat-name-display">Michi</div>
+            <div class="cat-preview-id" id="cat-id">ADN #CAT</div>
+            <div class="cat-traits" id="cat-traits"></div>
+          </div>
+
+          <div class="cat-controls reveal reveal-delay-1">
+            <div class="field">
+              <label for="cat-name">Ponle nombre</label>
+              <div class="input-row">
+                <div class="input-wrap">
+                  <svg aria-hidden="true"><use href="#i-paw"/></svg>
+                  <input id="cat-name" name="cat-name" type="text" maxlength="12" value="Michi" autocomplete="off" spellcheck="false" placeholder="Ej. Misi">
+                </div>
+                <button class="btn btn--small btn--ghost" type="button" id="cat-random" aria-label="Nombre aleatorio">
+                  <svg aria-hidden="true"><use href="#i-dice"/></svg>
+                  Sorpréndeme
+                </button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Accesorio</label>
+              <div class="chip-row" id="accessory-chips">
+                <button class="chip is-active" type="button" data-accessory="">Aleatorio</button>
+                <button class="chip" type="button" data-accessory="none">Sin accesorio</button>
+                <button class="chip" type="button" data-accessory="bow">Lazo</button>
+                <button class="chip" type="button" data-accessory="glasses">Gafas</button>
+                <button class="chip" type="button" data-accessory="hat">Sombrero</button>
+                <button class="chip" type="button" data-accessory="mustache">Bigote</button>
+                <button class="chip" type="button" data-accessory="fiesta">Fiesta</button>
+                <button class="chip" type="button" data-accessory="corona">Corona</button>
+                <button class="chip" type="button" data-accessory="bufanda">Bufanda</button>
+              </div>
+            </div>
+
+            <p class="hint">
+              <svg aria-hidden="true"><use href="#i-sparkle"/></svg>
+              <span>Secretos gatunos: escribe <strong>Simba</strong>, <strong>Silver</strong>, <strong>Miki</strong>, <strong>Chispa</strong> o <strong>Dorado</strong> para ver qué pasa.</span>
+            </p>
+
+            <ul class="dna-notes">
+              <li>
+                <svg aria-hidden="true"><use href="#i-check"/></svg>
+                <span>Mismo nombre, mismo michi. Siempre, en cualquier partida.</span>
+              </li>
+              <li>
+                <svg aria-hidden="true"><use href="#i-eye"/></svg>
+                <span>Seis rasgos y un accesorio se sortean usando el nombre como semilla.</span>
+              </li>
+              <li>
+                <svg aria-hidden="true"><use href="#i-lock"/></svg>
+                <span>Todo se genera en tu navegador: no se envía ningún dato.</span>
+              </li>
+            </ul>
+
+            <div class="cat-actions">
+              <button class="btn" type="button" id="cat-again">
+                <svg aria-hidden="true"><use href="#i-dice"/></svg>
+                Otro michi al azar
+              </button>
+              <button class="btn btn--ghost" type="button" id="cat-download">
+                <svg aria-hidden="true"><use href="#i-download"/></svg>
+                Descargar SVG
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-head reveal">
+          <h3><svg aria-hidden="true"><use href="#i-users"/></svg> La camada de la casa</h3>
+          <p>Toca un michi para llevarlo a la vista previa.</p>
+        </div>
+        <div class="cat-gallery" id="cat-gallery" aria-label="Galería de michis generados"></div>
+        <div style="display:flex;justify-content:center;margin-top:22px">
+          <button class="btn btn--small btn--ghost reveal" type="button" id="gallery-refresh">
+            <svg aria-hidden="true"><use href="#i-dice"/></svg>
+            Gatos aleatorios
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modos -->
+    <section class="section" id="modos" aria-labelledby="modos-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Mucho más que un puzle</span>
+          <h2 id="modos-title">Un misterio nuevo cada día</h2>
+          <p>Casos rápidos para jugar en un descanso, en el transporte o por la tarde. Un caso diario único para resolver, una historia que engancha y un gato legendario que lo cambia todo.</p>
+        </div>
+
+        <div class="bento">
+          <article class="bento-card bento-a reveal">
+            <span class="kicker">Caso diario</span>
+            <h3>El mismo misterio para todos</h3>
+            <p>Un caso nuevo cada día. Compáralo con quien quieras, vuelve mañana y descubre un travieso distinto. El ovillo nunca se queda quieto.</p>
+            <div class="mode-pills">
+              <span>Un caso al día</span>
+              <span>Para toda la camada</span>
+            </div>
+            <svg class="bento-art bento-art--calendar" viewBox="0 0 150 130" aria-hidden="true">
+              <rect x="8" y="18" width="134" height="104" rx="18" fill="var(--surface-3)" stroke="var(--border-strong)"/>
+              <rect x="8" y="18" width="134" height="30" rx="15" fill="var(--accent)" opacity=".18"/>
+              <circle cx="30" cy="33" r="4" fill="var(--accent)"/><circle cx="120" cy="33" r="4" fill="var(--accent)"/>
+              <g fill="var(--muted)" opacity=".45">
+                <rect x="24" y="60" width="18" height="14" rx="4"/><rect x="50" y="60" width="18" height="14" rx="4"/><rect x="76" y="60" width="18" height="14" rx="4"/><rect x="102" y="60" width="18" height="14" rx="4"/>
+                <rect x="24" y="82" width="18" height="14" rx="4"/><rect x="50" y="82" width="18" height="14" rx="4"/><rect x="76" y="82" width="18" height="14" rx="4"/>
+              </g>
+              <rect x="100" y="80" width="22" height="20" rx="6" fill="var(--accent)"/>
+              <path d="M111 85v6l4 3" fill="none" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </article>
+
+          <article class="bento-card bento-b reveal reveal-delay-1">
+            <span class="kicker">Modo historia</span>
+            <h3>20 niveles, una camada</h3>
+            <p>Casos cortos que enseñan a leer la casa paso a paso. Completa el capítulo y gana accesorios exclusivos para tu gato.</p>
+            <svg class="bento-art bento-art--trail" viewBox="0 0 150 110" aria-hidden="true">
+              <path d="M8 92C40 82 38 52 70 50S112 32 142 18" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="2 8" stroke-linecap="round" opacity=".65"/>
+              <g fill="var(--accent)" opacity=".75">
+                <ellipse cx="18" cy="88" rx="5" ry="4"/><ellipse cx="14" cy="83" rx="2" ry="2.6"/><ellipse cx="18" cy="80" rx="2" ry="2.6"/><ellipse cx="22" cy="82" rx="2" ry="2.6"/>
+                <ellipse cx="70" cy="51" rx="5" ry="4"/><ellipse cx="66" cy="46" rx="2" ry="2.6"/><ellipse cx="70" cy="43" rx="2" ry="2.6"/><ellipse cx="74" cy="45" rx="2" ry="2.6"/>
+                <ellipse cx="130" cy="25" rx="5" ry="4"/><ellipse cx="126" cy="20" rx="2" ry="2.6"/><ellipse cx="130" cy="17" rx="2" ry="2.6"/><ellipse cx="134" cy="19" rx="2" ry="2.6"/>
+              </g>
+            </svg>
+          </article>
+
+          <article class="bento-card bento-c reveal">
+            <span class="kicker">Casas a tu medida</span>
+            <h3>De 3 a 7 gatos</h3>
+            <p>Empieza pequeño y sube de nivel. Tableros de 4×4, 6×8 y casas enormes de 8×10 con más habitaciones.</p>
+            <svg class="bento-art bento-art--grid" viewBox="0 0 94 84" aria-hidden="true">
+              <g fill="none" stroke="var(--accent)" stroke-width="2" opacity=".55">
+                <rect x="4" y="4" width="34" height="34" rx="7"/><rect x="44" y="4" width="20" height="34" rx="7"/><rect x="70" y="4" width="20" height="34" rx="7"/>
+                <rect x="4" y="44" width="20" height="34" rx="7"/><rect x="30" y="44" width="34" height="34" rx="7"/>
+              </g>
+              <circle cx="21" cy="21" r="5" fill="var(--accent)"/><circle cx="54" cy="21" r="5" fill="var(--accent)" opacity=".7"/>
+            </svg>
+          </article>
+
+          <article class="bento-card bento-d reveal reveal-delay-1">
+            <span class="kicker">Gato legendario</span>
+            <h3>El dorado reparte suerte</h3>
+            <p>De vez en cuando aparece un michi de oro con corona. Si resuelves el caso, los puntos se duplican.</p>
+            <svg class="bento-art bento-art--stars" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="m32 4 6 18 18 6-18 6-6 18-6-18-18-6 18-6 6-18Z" fill="var(--gold)" opacity=".85"/>
+              <path d="m52 42 2.4 7.2L62 52l-7.6 2.8L52 62l-2.4-7.2L42 52l7.6-2.8L52 42Z" fill="var(--gold)" opacity=".5"/>
+            </svg>
+          </article>
+
+          <article class="bento-card bento-e reveal reveal-delay-2">
+            <span class="kicker">Tu michi, tu estilo</span>
+            <h3>Viste a tu detective</h3>
+            <p>Lazo, gafas, sombrero, bigote o bufanda. Gana estrellas jugando y desbloquea accesorios para tu gato.</p>
+            <div class="mode-pills">
+              <span>Lazo</span><span>Gafas</span><span>Bufanda</span><span>Corona</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="feature-strip reveal">
+          <div class="bento-card" style="padding:18px 20px;display:flex;align-items:center;gap:12px">
+            <svg aria-hidden="true" style="width:22px;height:22px;color:var(--accent);flex:none"><use href="#i-music"/></svg>
+            <span style="font-size:.82rem;font-weight:800;color:var(--muted)">Sonido y vibración</span>
+          </div>
+          <div class="bento-card" style="padding:18px 20px;display:flex;align-items:center;gap:12px">
+            <svg aria-hidden="true" style="width:22px;height:22px;color:var(--accent);flex:none"><use href="#i-sparkle"/></svg>
+            <span style="font-size:.82rem;font-weight:800;color:var(--muted)">Animaciones con alma</span>
+          </div>
+          <div class="bento-card" style="padding:18px 20px;display:flex;align-items:center;gap:12px">
+            <svg aria-hidden="true" style="width:22px;height:22px;color:var(--accent);flex:none"><use href="#i-globe"/></svg>
+            <span style="font-size:.82rem;font-weight:800;color:var(--muted)">Español e inglés</span>
+          </div>
+          <div class="bento-card" style="padding:18px 20px;display:flex;align-items:center;gap:12px">
+            <svg aria-hidden="true" style="width:22px;height:22px;color:var(--accent);flex:none"><use href="#i-moon"/></svg>
+            <span style="font-size:.82rem;font-weight:800;color:var(--muted)">Día y noche</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gato dorado -->
+    <section class="section golden" id="dorado" aria-labelledby="dorado-title">
+      <div class="container">
+        <div class="golden-grid">
+          <div class="reveal">
+            <span class="eyebrow">Muy de vez en cuando</span>
+            <h2 id="dorado-title" style="margin-top:16px">El legendario<br><span class="gradient-text">gato dorado</span></h2>
+            <p class="lead">Hay un michi que no sale en los libros de detectives: pelaje de oro, corona y un aura que ilumina la casa. Aparece por sorpresa, se esconde entre los demás y convierte cada caso en una oportunidad doble.</p>
+            <div class="golden-stats">
+              <div class="gold-stat"><strong>×2</strong><span>Puntos</span></div>
+              <div class="gold-stat"><strong>1</strong><span>Corona real</span></div>
+              <div class="gold-stat"><strong>∞</strong><span>Misterio</span></div>
+            </div>
+          </div>
+          <div class="golden-cat reveal reveal-delay-1" aria-hidden="true">
+            <span class="gold-spark"><svg><use href="#i-sparkle"/></svg></span>
+            <span class="gold-spark"><svg><use href="#i-sparkle"/></svg></span>
+            <span class="gold-spark"><svg><use href="#i-sparkle"/></svg></span>
+            <div id="golden-cat"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Historia -->
+    <section class="section" id="historia" aria-labelledby="historia-title">
+      <div class="container">
+        <div class="history">
+          <div class="reveal">
+            <span class="eyebrow">Modo historia</span>
+            <h2 id="historia-title" style="margin:16px 0 18px">Aprende a leer la casa, nivel a nivel</h2>
+            <p class="lead">Veinte casos cortos encadenados. Cada nivel añade una pista nueva y te enseña a mirar la casa como un detective. Completa el capítulo básico y llévate la codiciada corona de bronce.</p>
+            <ul style="list-style:none;padding:0;margin:24px 0 0;display:grid;gap:11px;color:var(--muted);font-size:.93rem">
+              <li style="display:flex;gap:10px;align-items:flex-start"><svg aria-hidden="true" style="width:19px;height:19px;color:var(--green);flex:none;margin-top:3px"><use href="#i-check"/></svg><span>Casos de 4×4 para aprender sin prisa</span></li>
+              <li style="display:flex;gap:10px;align-items:flex-start"><svg aria-hidden="true" style="width:19px;height:19px;color:var(--green);flex:none;margin-top:3px"><use href="#i-check"/></svg><span>Recompensas exclusivas: bufanda y corona de bronce</span></li>
+              <li style="display:flex;gap:10px;align-items:flex-start"><svg aria-hidden="true" style="width:19px;height:19px;color:var(--green);flex:none;margin-top:3px"><use href="#i-check"/></svg><span>Tu progreso se guarda nivel a nivel</span></li>
+            </ul>
+          </div>
+          <div class="level-path reveal reveal-delay-1" aria-label="Camino de niveles: 7 completados, nivel 8 en curso y el resto bloqueados">
+            <div class="level is-done">01</div><div class="level is-done">02</div><div class="level is-done">03</div><div class="level is-done">04</div><div class="level is-done">05</div>
+            <div class="level is-done">06</div><div class="level is-done">07</div><div class="level is-now">08</div><div class="level is-locked">09</div><div class="level is-locked">10</div>
+            <div class="level is-locked">11</div><div class="level is-locked">12</div><div class="level is-locked">13</div><div class="level is-locked">14</div><div class="level is-locked">15</div>
+            <div class="level is-locked">16</div><div class="level is-locked">17</div><div class="level is-locked">18</div><div class="level is-locked">19</div><div class="level is-locked">20</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title" style="padding-top:0">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Antes de investigar</span>
+          <h2 id="faq-title">Preguntas frecuentes</h2>
+          <p>Todo lo que suele preguntar la camada antes de abrir su primer expediente.</p>
+        </div>
+        <div class="faq-list reveal">
+          <details class="faq-item">
+            <summary>¿Michidoku es gratis?</summary>
+            <p>Sí. Se puede jugar gratis. El juego incluye anuncios y vídeos voluntarios que puedes ver para conseguir pistas o estrellas extra. También hay contenido que se desbloquea jugando, como la historia y sus accesorios.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿En qué plataformas estará disponible?</summary>
+            <p>Estamos preparando el lanzamiento en Google Play y App Store. La web es el punto de encuentro mientras terminamos la última versión: aquí puedes conocer el juego, generar michis y ver cómo funciona un caso.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Necesito saber jugar al sudoku?</summary>
+            <p>No. La única regla de colocación es que dos gatos no compartan fila ni columna (con la excepción de la caja). El resto es leer pistas y descartar. Si sabes observar, sabes jugar.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Los gatos son siempre iguales?</summary>
+            <p>Sí. Cada nombre genera un ADN felino determinista: mismo nombre, mismo pelaje, orejas, mirada y accesorio. Puedes comprobarlo en el generador de esta página: escribe el mismo nombre dos veces y verás el mismo michi.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué es el gato dorado?</summary>
+            <p>Un michi legendario que aparece por sorpresa en algunos casos. Lleva corona, brilla más que el resto y, si resuelves el caso, multiplica los puntos por dos. Encontrarlo es cuestión de suerte; resolverlo, de deducción.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Puedo compartir un caso con alguien?</summary>
+            <p>Sí. Los casos se comparten con un enlace web al mismo tablero. Si tienes la app instalada, el enlace se abre directamente en el caso; si no, verás una página desde la que podrás intentarlo.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Dónde puedo reportar un fallo o una idea?</summary>
+            <p>Puedes abrir un aviso en el <a href="https://github.com/isMMa/michidoku-landingpage/issues" target="_blank" rel="noreferrer" style="color:var(--accent);font-weight:800">repositorio de la web</a>. Para fallos del juego, cuéntanos qué caso, qué gato y qué esperabas que pasara: nos ayuda a seguir las huellas.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Descargar -->
+    <section class="final-cta" id="descargar" aria-labelledby="descargar-title">
+      <div class="container">
+        <div class="final-card reveal">
+          <span class="eyebrow" style="justify-content:center">La casa ya está abierta</span>
+          <h2 id="descargar-title" style="margin-top:16px">¿Te atreves a resolver<br>el primer caso?</h2>
+          <p class="lead" style="text-align:center">Muy pronto en Google Play y App Store. Mientras tanto, genera tu michi, descubre los modos y sigue las huellas hasta el lanzamiento.</p>
+          <div class="store-row">
+            <button class="store-badge" type="button" data-store="android">
+              <svg aria-hidden="true"><use href="#i-android"/></svg>
+              <span><small>Muy pronto en</small><strong>Google Play</strong></span>
+              <span class="soon-pill">Pronto</span>
+            </button>
+            <button class="store-badge" type="button" data-store="ios">
+              <svg aria-hidden="true"><use href="#i-apple"/></svg>
+              <span><small>Muy pronto en</small><strong>App Store</strong></span>
+              <span class="soon-pill">Pronto</span>
+            </button>
+          </div>
+          <p class="store-note" id="store-note" role="status" aria-live="polite">El lanzamiento está en camino. Mientras tanto, la casa sigue llena de michis.</p>
+          <div class="cta-cat-line" id="cta-cats" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#top" aria-label="Michidoku, volver arriba">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M12 29c0-7 5.4-12 12-12s12 5 12 12-5.4 11-12 11-12-4-12-11Z" fill="#3A2114"/><path d="M12 21 9 8l10 6M36 21l3-13-10 6" fill="#3A2114"/><path d="M12 21 10 12l7 4M36 21l2-9-7 4" fill="#F08A9B"/><ellipse cx="19" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><ellipse cx="29" cy="28" rx="2.4" ry="2.8" fill="#FFF6E6"/><path d="M24 31.5 21.8 34h4.4L24 31.5Z" fill="#F08A9B"/><path d="M24 34v2m0 0c-1.5 1.6-3.4 1.3-4.2.4M24 36c1.5 1.6 3.4 1.3 4.2.4" fill="none" stroke="#FFF6E6" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <span>Michidoku</span>
+          </a>
+          <p>Un juego de deducción gatuna hecho con cariño, muchas pistas y algún que otro ovillo roto.</p>
+        </div>
+        <div class="footer-col">
+          <h4>El juego</h4>
+          <a href="#el-caso">El caso</a>
+          <a href="#como-jugar">Cómo jugar</a>
+          <a href="#michis">Los michis</a>
+          <a href="#modos">Modos de juego</a>
+          <a href="#dorado">Gato dorado</a>
+        </div>
+        <div class="footer-col">
+          <h4>Proyecto</h4>
+          <a href="https://github.com/isMMa/michidoku-landingpage" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://devcodelight.com" target="_blank" rel="noreferrer">DevCodeLight</a>
+          <a href="caso/">Enlaces de casos</a>
+          <a href="#descargar">Lanzamiento</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacidad/">Privacidad</a>
+          <a href="terminos/">Términos de uso</a>
+          <a href="privacidad/#datos">Cookies y datos</a>
+          <a href="https://github.com/isMMa/michidoku-landingpage/issues" target="_blank" rel="noreferrer">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Michidoku · DevCodeLight</span>
+        <span class="made">Hecho con <svg aria-hidden="true"><use href="#i-heart"/></svg> y muchas siestas de gato</span>
+        <span>Sin cookies de seguimiento</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="cats.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

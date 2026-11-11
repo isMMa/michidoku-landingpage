@@ -1,0 +1,25 @@
+{
+  "name": "Michidoku",
+  "short_name": "Michidoku",
+  "description": "Juego de deducción gatuna: sigue las pistas y descubre quién rompió el ovillo.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#080b16",
+  "theme_color": "#ffc93c",
+  "icons": [
+    {
+      "src": "/assets/michidoku-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

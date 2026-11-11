@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="es" data-theme="noche">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Condiciones de uso · Michidoku</title>
+    <meta
+      name="description"
+      content="Condiciones de uso de Michidoku: licencia, uso aceptable, propiedad intelectual, anuncios, guardado y responsabilidad."
+    />
+    <meta name="theme-color" content="#080b16" />
+    <link rel="icon" href="../assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          var params = new URLSearchParams(location.search);
+          var tema = params.get('tema');
+          if (tema !== 'claro' && tema !== 'noche') tema = localStorage.getItem('michidoku-tema');
+          if (tema !== 'claro' && tema !== 'noche') {
+            tema = window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noche';
+          }
+          document.documentElement.dataset.theme = tema;
+          var lang = params.get('lang');
+          if (lang !== 'es' && lang !== 'en') lang = localStorage.getItem('michidoku-lang');
+          if (lang !== 'es' && lang !== 'en') {
+            lang = (navigator.language || 'es').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+          }
+          document.documentElement.lang = lang;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../legal.css" />
+  </head>
+  <body data-title-es="Condiciones de uso · Michidoku" data-title-en="Terms of use · Michidoku">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <div class="page-shell">
+      <header class="page-header">
+        <div class="inner">
+          <a class="page-brand" href="../">
+            <img src="../assets/michidoku-icon.svg" alt="" width="38" height="38" />
+            <span>Michidoku</span>
+          </a>
+          <a class="back" href="../">Volver a la web</a>
+          <div class="lang-switch" role="group" aria-label="Idioma / Language">
+            <button type="button" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-main" id="contenido">
+        <article class="doc-card" lang="es" data-lang-block="es">
+          <header class="doc-head">
+            <p class="eyebrow">Información legal</p>
+            <h1 class="doc-title">Condiciones de uso</h1>
+            <p class="doc-lead">
+              Estas condiciones explican las reglas para usar Michidoku: qué puedes hacer con la
+              app, qué es tuyo y qué es nuestro, cómo funcionan los anuncios y las recompensas y
+              qué responsabilidad asumimos.
+            </p>
+            <div class="doc-meta">
+              <span>Actualizado el 11 de noviembre de 2026</span>
+              <span>Versión 1.0</span>
+              <span>Lectura: 4 minutos</span>
+            </div>
+          </header>
+
+          <nav class="doc-toc" aria-label="Índice">
+            <p>En esta página</p>
+            <ol>
+              <li><a href="#aceptacion">Aceptación</a></li>
+              <li><a href="#servicio">Descripción del servicio</a></li>
+              <li><a href="#requisitos">Requisitos y permisos</a></li>
+              <li><a href="#licencia">Licencia de uso</a></li>
+              <li><a href="#uso">Uso aceptable</a></li>
+              <li><a href="#propiedad">Propiedad intelectual</a></li>
+              <li><a href="#enlaces">Casos compartidos y enlaces</a></li>
+              <li><a href="#anuncios">Publicidad</a></li>
+              <li><a href="#recompensas">Estrellas y recompensas</a></li>
+              <li><a href="#disponibilidad">Disponibilidad y guardado</a></li>
+              <li><a href="#responsabilidad">Responsabilidad</a></li>
+              <li><a href="#terceros">Enlaces y servicios de terceros</a></li>
+              <li><a href="#ley">Ley aplicable</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ol>
+          </nav>
+
+          <div class="doc-prose">
+            <section id="aceptacion">
+              <h2>1. Aceptación</h2>
+              <p>
+                Michidoku es una aplicación desarrollada por <strong>DevCodeLight</strong> (Ismael
+                González). Al descargar, instalar o usar la app aceptas estas condiciones de uso y la
+                <a href="../privacidad/">política de privacidad</a>. Si no estás de acuerdo, no uses
+                la aplicación.
+              </p>
+              <p>
+                Estas condiciones se aplican a la app para Android e iOS y a la web
+                <strong>michidoku.devcodelight.com</strong>, incluida la página de casos compartidos.
+              </p>
+            </section>
+
+            <section id="servicio">
+              <h2>2. Descripción del servicio</h2>
+              <p>
+                Michidoku es un juego de deducción en el que colocas gatos en una casa y sigues
+                pistas para descubrir al travieso. Los casos se generan de forma determinista a
+                partir de un tamaño y una semilla, de modo que la misma combinación produce el mismo
+                tablero.
+              </p>
+              <p>
+                El juego no requiere cuenta ni conexión permanente. Algunas funciones, como los
+                anuncios, sí necesitan conexión a internet.
+              </p>
+            </section>
+
+            <section id="requisitos">
+              <h2>3. Requisitos y permisos</h2>
+              <ul>
+                <li>Un dispositivo compatible con la versión publicada en tu tienda de apps.</li>
+                <li>
+                  Permisos opcionales: notificaciones (para el aviso diario) y seguimiento en iOS
+                  (para publicidad personalizada). Puedes rechazarlos y seguir jugando.
+                </li>
+                <li>
+                  Sonido, vibración y animaciones se pueden desactivar en Ajustes; el juego sigue
+                  siendo completamente funcional.
+                </li>
+              </ul>
+            </section>
+
+            <section id="licencia">
+              <h2>4. Licencia de uso</h2>
+              <p>
+                Te concedemos una licencia <strong>personal, limitada, no exclusiva, no transferible
+                y revocable</strong> para instalar y usar Michidoku en dispositivos que controles,
+                para tu entretenimiento personal y no comercial. La app se licencia, no se vende.
+              </p>
+              <p>
+                Esta licencia no te permite redistribuir la app ni sus recursos, ni usarla para
+                ofrecer un servicio a terceros, salvo autorización escrita.
+              </p>
+            </section>
+
+            <section id="uso">
+              <h2>5. Uso aceptable</h2>
+              <p>Al usar Michidoku te comprometes a no:</p>
+              <ul>
+                <li>Copiar, vender, alquilar, sublicenciar o redistribuir la app o sus recursos.</li>
+                <li>
+                  Modificar, descompilar o hacer ingeniería inversa, salvo en los casos permitidos
+                  expresamente por la ley.
+                </li>
+                <li>
+                  Automatizar el juego, manipular el guardado local para alterar recompensas o
+                  eludir los anuncios.
+                </li>
+                <li>Usar la app de forma que infrinja derechos de terceros o la ley aplicable.</li>
+                <li>
+                  Atacar, sobrecargar o intentar acceder sin autorización a los sistemas que sirven
+                  la web o los enlaces de casos.
+                </li>
+              </ul>
+            </section>
+
+            <section id="propiedad">
+              <h2>6. Propiedad intelectual</h2>
+              <p>
+                El código, el diseño, los textos, las ilustraciones de gatos, los muebles, la marca
+                <strong>Michidoku</strong> y el resto de elementos de la app son titularidad de
+                DevCodeLight o se usan con licencia. Estas condiciones no te ceden ningún derecho de
+                propiedad intelectual sobre ellos.
+              </p>
+              <p>
+                Los tableros y pistas que genera el juego se te licencian para que los juegues y
+                compartas sus enlaces. Puedes publicar capturas y resultados siempre que no
+                presentes la app como tuya ni la redistribuyas.
+              </p>
+            </section>
+
+            <section id="enlaces">
+              <h2>7. Casos compartidos y enlaces</h2>
+              <p>
+                Los enlaces de caso contienen únicamente el tamaño y la semilla del caso. No
+                incluyen datos personales. Al compartirlos, cualquier persona con el enlace puede
+                intentar resolver el mismo tablero.
+              </p>
+              <p>
+                Los enlaces se ofrecen tal cual y sin garantía de disponibilidad permanente. Si una
+                actualización cambia el generador de casos, un enlace antiguo podría dejar de
+                reproducir exactamente el mismo tablero. No eliminamos enlaces de forma deliberada,
+                pero podemos cambiar la web o dejar de servirla.
+              </p>
+            </section>
+
+            <section id="anuncios">
+              <h2>8. Publicidad</h2>
+              <p>
+                Michidoku se financia con anuncios de <strong>Google AdMob</strong>. No controlamos
+                el contenido concreto de cada anuncio; si ves algo inapropiado, puedes reportarlo a
+                Google o escribirnos para que lo revisemos.
+              </p>
+              <p>
+                Los anuncios pueden ser personalizados o no personalizados según tu consentimiento y
+                la normativa aplicable, tal como se explica en la
+                <a href="../privacidad/">política de privacidad</a>. Bloquear o eludir los anuncios
+                con herramientas externas puede impedir el funcionamiento normal de algunas
+                funciones.
+              </p>
+            </section>
+
+            <section id="recompensas">
+              <h2>9. Estrellas y recompensas</h2>
+              <p>
+                Las estrellas, puntos, desbloqueos y demás recompensas del juego son elementos
+                virtuales <strong>sin valor monetario</strong>. No son canjeables por dinero, bienes
+                ni servicios, no generan intereses y no son transferibles entre cuentas o
+                dispositivos.
+              </p>
+              <p>
+                Puedes obtener estrellas jugando o viendo vídeos recompensados. Estas recompensas
+                forman parte del juego y pueden ajustarse para mantener el equilibrio. Actualmente
+                <strong>no hay compras dentro de la app</strong>; si se añaden en el futuro, se
+                regirán por las condiciones de la tienda correspondiente.
+              </p>
+            </section>
+
+            <section id="disponibilidad">
+              <h2>10. Disponibilidad y guardado</h2>
+              <p>
+                Procuramos que la app funcione correctamente, pero no garantizamos disponibilidad
+                ininterrumpida ni ausencia total de errores. Podemos publicar actualizaciones,
+                cambiar funciones o dejar de dar soporte a versiones antiguas.
+              </p>
+              <p>
+                Tu progreso se guarda <strong>solo en tu dispositivo</strong>. No hacemos copias de
+                seguridad en servidores. Desinstalar la app, borrar sus datos o perder el
+                dispositivo puede eliminar tus partidas y estrellas de forma irreversible.
+              </p>
+            </section>
+
+            <section id="responsabilidad">
+              <h2>11. Responsabilidad</h2>
+              <p>
+                En la medida permitida por la ley, Michidoku se proporciona «tal cual» y sin
+                garantías implícitas de comerciabilidad, idoneidad para un fin concreto o ausencia
+                de errores. No respondemos de daños indirectos, pérdida de datos locales o
+                interrupciones causadas por terceros o por tu dispositivo.
+              </p>
+              <p>
+                Nada en estas condiciones excluye o limita los derechos que la normativa de consumo
+                te reconoce de forma imperativa, ni nuestra responsabilidad por dolo o negligencia
+                grave.
+              </p>
+            </section>
+
+            <section id="terceros">
+              <h2>12. Enlaces y servicios de terceros</h2>
+              <p>
+                La app y la web pueden enlazar a servicios de terceros, como Google, las tiendas de
+                aplicaciones o las páginas legales. No controlamos esos servicios y su uso se rige
+                por sus propias condiciones y políticas.
+              </p>
+            </section>
+
+            <section id="ley">
+              <h2>13. Ley aplicable</h2>
+              <p>
+                Estas condiciones se rigen por la legislación española. Si eres consumidor, puedes
+                acudir a los tribunales de tu domicilio y conservas todos los derechos que te
+                reconoce la ley. Si no lo eres, las partes se someten a los tribunales de Madrid,
+                salvo pacto en contrario.
+              </p>
+              <p>
+                Si alguna cláusula se declara nula, el resto seguirá siendo válido. La falta de
+                ejercicio de un derecho no implica su renuncia.
+              </p>
+            </section>
+
+            <section id="contacto">
+              <h2>14. Contacto</h2>
+              <p>
+                Para cualquier duda sobre estas condiciones, escribe a
+                <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a>. También puedes
+                consultar la <a href="../privacidad/">política de privacidad</a>.
+              </p>
+              <p class="doc-note">
+                <strong>Titular:</strong> DevCodeLight · Ismael González · España. Actividad:
+                desarrollo de aplicaciones y contenidos digitales.
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <article class="doc-card" lang="en" data-lang-block="en">
+          <header class="doc-head">
+            <p class="eyebrow">Legal information</p>
+            <h1 class="doc-title">Terms of use</h1>
+            <p class="doc-lead">
+              These terms explain the rules for using Michidoku: what you may do with the app, what
+              is yours and what is ours, how ads and rewards work, and what responsibility we
+              assume.
+            </p>
+            <div class="doc-meta">
+              <span>Updated 11 November 2026</span>
+              <span>Version 1.0</span>
+              <span>4-minute read</span>
+            </div>
+          </header>
+
+          <nav class="doc-toc" aria-label="Contents">
+            <p>On this page</p>
+            <ol>
+              <li><a href="#acceptance">Acceptance</a></li>
+              <li><a href="#service">The service</a></li>
+              <li><a href="#requirements">Requirements and permissions</a></li>
+              <li><a href="#licence">Licence to use</a></li>
+              <li><a href="#acceptable">Acceptable use</a></li>
+              <li><a href="#ip">Intellectual property</a></li>
+              <li><a href="#links">Shared cases and links</a></li>
+              <li><a href="#ads">Advertising</a></li>
+              <li><a href="#rewards">Stars and rewards</a></li>
+              <li><a href="#availability">Availability and saved data</a></li>
+              <li><a href="#liability">Liability</a></li>
+              <li><a href="#third-parties">Third-party links and services</a></li>
+              <li><a href="#law">Governing law</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ol>
+          </nav>
+
+          <div class="doc-prose">
+            <section id="acceptance">
+              <h2>1. Acceptance</h2>
+              <p>
+                Michidoku is an application developed by <strong>DevCodeLight</strong> (Ismael
+                González). By downloading, installing or using the app you accept these terms of use
+                and the <a href="../privacidad/">privacy policy</a>. If you do not agree, do not use
+                the application.
+              </p>
+              <p>
+                These terms apply to the Android and iOS app and to the website
+                <strong>michidoku.devcodelight.com</strong>, including the shared case page.
+              </p>
+            </section>
+
+            <section id="service">
+              <h2>2. The service</h2>
+              <p>
+                Michidoku is a deduction game in which you place cats in a house and follow clues to
+                find the troublemaker. Cases are generated deterministically from a size and a seed,
+                so the same combination produces the same board.
+              </p>
+              <p>
+                The game requires no account or permanent connection. Some features, such as ads, do
+                need an internet connection.
+              </p>
+            </section>
+
+            <section id="requirements">
+              <h2>3. Requirements and permissions</h2>
+              <ul>
+                <li>A device compatible with the version published in your app store.</li>
+                <li>
+                  Optional permissions: notifications (for the daily reminder) and tracking on iOS
+                  (for personalised advertising). You may decline them and keep playing.
+                </li>
+                <li>
+                  Sound, vibration and animations can be turned off in Settings; the game remains
+                  fully functional.
+                </li>
+              </ul>
+            </section>
+
+            <section id="licence">
+              <h2>4. Licence to use</h2>
+              <p>
+                We grant you a <strong>personal, limited, non-exclusive, non-transferable and
+                revocable</strong> licence to install and use Michidoku on devices you control, for
+                your personal, non-commercial entertainment. The app is licensed, not sold.
+              </p>
+              <p>
+                This licence does not allow you to redistribute the app or its assets, or to use it
+                to provide a service to third parties, without written permission.
+              </p>
+            </section>
+
+            <section id="acceptable">
+              <h2>5. Acceptable use</h2>
+              <p>When using Michidoku you agree not to:</p>
+              <ul>
+                <li>Copy, sell, rent, sublicense or redistribute the app or its assets.</li>
+                <li>
+                  Modify, decompile or reverse engineer it, except where expressly permitted by law.
+                </li>
+                <li>
+                  Automate the game, tamper with local saves to alter rewards, or bypass ads.
+                </li>
+                <li>Use the app in a way that infringes third-party rights or applicable law.</li>
+                <li>
+                  Attack, overload or attempt unauthorised access to the systems serving the website
+                  or case links.
+                </li>
+              </ul>
+            </section>
+
+            <section id="ip">
+              <h2>6. Intellectual property</h2>
+              <p>
+                The code, design, text, cat illustrations, furniture, the
+                <strong>Michidoku</strong> brand and the rest of the app's elements are owned by
+                DevCodeLight or used under licence. These terms do not transfer any intellectual
+                property rights to you.
+              </p>
+              <p>
+                The boards and clues generated by the game are licensed to you so you can play them
+                and share their links. You may post screenshots and results as long as you do not
+                present the app as your own or redistribute it.
+              </p>
+            </section>
+
+            <section id="links">
+              <h2>7. Shared cases and links</h2>
+              <p>
+                Case links contain only the case size and seed. They include no personal data. When
+                you share them, anyone with the link can try to solve the same board.
+              </p>
+              <p>
+                Links are provided as is, with no guarantee of permanent availability. If an update
+                changes the case generator, an old link might no longer reproduce exactly the same
+                board. We do not deliberately remove links, but we may change the website or stop
+                serving it.
+              </p>
+            </section>
+
+            <section id="ads">
+              <h2>8. Advertising</h2>
+              <p>
+                Michidoku is funded by <strong>Google AdMob</strong> ads. We do not control the
+                specific content of each ad; if you see something inappropriate, you can report it to
+                Google or contact us so we can review it.
+              </p>
+              <p>
+                Ads may be personalised or non-personalised depending on your consent and applicable
+                law, as explained in the <a href="../privacidad/">privacy policy</a>. Blocking or
+                bypassing ads with external tools may prevent some features from working normally.
+              </p>
+            </section>
+
+            <section id="rewards">
+              <h2>9. Stars and rewards</h2>
+              <p>
+                Stars, points, unlocks and other in-game rewards are virtual items
+                <strong>with no monetary value</strong>. They cannot be exchanged for money, goods or
+                services, do not earn interest and are not transferable between accounts or devices.
+              </p>
+              <p>
+                You can earn stars by playing or by watching rewarded videos. These rewards are part
+                of the game and may be adjusted to keep it balanced. There are currently
+                <strong>no in-app purchases</strong>; if they are added in the future, they will be
+                governed by the relevant store's terms.
+              </p>
+            </section>
+
+            <section id="availability">
+              <h2>10. Availability and saved data</h2>
+              <p>
+                We aim for the app to work correctly, but we do not guarantee uninterrupted
+                availability or freedom from all errors. We may release updates, change features or
+                stop supporting old versions.
+              </p>
+              <p>
+                Your progress is saved <strong>only on your device</strong>. We do not back it up to
+                servers. Uninstalling the app, clearing its data or losing your device may erase your
+                games and stars irreversibly.
+              </p>
+            </section>
+
+            <section id="liability">
+              <h2>11. Liability</h2>
+              <p>
+                To the extent permitted by law, Michidoku is provided “as is” and without implied
+                warranties of merchantability, fitness for a particular purpose or freedom from
+                errors. We are not liable for indirect damages, loss of local data or interruptions
+                caused by third parties or by your device.
+              </p>
+              <p>
+                Nothing in these terms excludes or limits the rights that consumer law grants you
+                mandatorily, nor our liability for wilful misconduct or gross negligence.
+              </p>
+            </section>
+
+            <section id="third-parties">
+              <h2>12. Third-party links and services</h2>
+              <p>
+                The app and website may link to third-party services such as Google, app stores or
+                legal pages. We do not control those services and their use is governed by their own
+                terms and policies.
+              </p>
+            </section>
+
+            <section id="law">
+              <h2>13. Governing law</h2>
+              <p>
+                These terms are governed by Spanish law. If you are a consumer, you may bring
+                proceedings in the courts of your domicile and you retain all rights granted to you by
+                law. Otherwise, the parties submit to the courts of Madrid, unless agreed otherwise.
+              </p>
+              <p>
+                If any clause is declared void, the rest remains valid. Failure to exercise a right
+                does not waive it.
+              </p>
+            </section>
+
+            <section id="contact">
+              <h2>14. Contact</h2>
+              <p>
+                For any question about these terms, write to
+                <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a>. You can also read
+                the <a href="../privacidad/">privacy policy</a>.
+              </p>
+              <p class="doc-note">
+                <strong>Owner:</strong> DevCodeLight · Ismael González · Spain. Activity: app
+                development and digital content.
+              </p>
+            </section>
+          </div>
+        </article>
+      </main>
+
+      <footer class="page-footer">
+        <div class="inner">
+          <span>© 2026 DevCodeLight · Michidoku</span>
+          <nav aria-label="Legal">
+            <a href="../terminos/">Condiciones de uso · Terms</a>
+            <a href="../privacidad/">Privacidad · Privacy</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../legal.js" defer></script>
+  </body>
+</html>

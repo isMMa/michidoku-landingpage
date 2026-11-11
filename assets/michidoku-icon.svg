@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Michidoku: ficha ambar con la cara de un michi crema sobre una cuadricula">
+  <title>Michidoku</title>
+  <defs>
+    <radialGradient id="mi-bg" cx="0.5" cy="0.35" r="0.85">
+      <stop offset="0" stop-color="#FFFBF3"/>
+      <stop offset="0.6" stop-color="#FAEBD3"/>
+      <stop offset="1" stop-color="#EFD4AD"/>
+    </radialGradient>
+    <linearGradient id="mi-tile" x1="0.05" y1="0" x2="0.95" y2="1">
+      <stop offset="0" stop-color="#FFD266"/>
+      <stop offset="0.42" stop-color="#F2A900"/>
+      <stop offset="1" stop-color="#D77F00"/>
+    </linearGradient>
+    <linearGradient id="mi-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="mi-shadow" x="-30%" y="-30%" width="170%" height="180%">
+      <feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#93500A" flood-opacity="0.40"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#mi-bg)"/>
+
+  <g fill="#B06000" opacity="0.14">
+    <g transform="translate(150 150) scale(1.05)">
+      <ellipse cx="0" cy="18" rx="46" ry="38"/>
+      <ellipse cx="-52" cy="-24" rx="20" ry="26" transform="rotate(-18 -52 -24)"/>
+      <ellipse cx="-18" cy="-46" rx="20" ry="26"/>
+      <ellipse cx="18" cy="-46" rx="20" ry="26"/>
+      <ellipse cx="52" cy="-24" rx="20" ry="26" transform="rotate(18 52 -24)"/>
+    </g>
+    <g transform="translate(874 874) scale(1.05)">
+      <ellipse cx="0" cy="18" rx="46" ry="38"/>
+      <ellipse cx="-52" cy="-24" rx="20" ry="26" transform="rotate(-18 -52 -24)"/>
+      <ellipse cx="-18" cy="-46" rx="20" ry="26"/>
+      <ellipse cx="18" cy="-46" rx="20" ry="26"/>
+      <ellipse cx="52" cy="-24" rx="20" ry="26" transform="rotate(18 52 -24)"/>
+    </g>
+  </g>
+
+  <g filter="url(#mi-shadow)" transform="rotate(-6 512 512)">
+    <rect x="176" y="176" width="672" height="672" rx="168" fill="url(#mi-tile)"/>
+    <rect x="176" y="176" width="672" height="672" rx="168" fill="none" stroke="#FFFFFF" stroke-width="10" opacity="0.30"/>
+    <rect x="196" y="196" width="632" height="632" rx="150" fill="url(#mi-sheen)"/>
+  </g>
+
+  <g transform="translate(512 520) scale(2.5)">
+    <path d="M-84 -30 L-98 -106 Q-97 -114 -90 -110 L-24 -64 Z" fill="#FFF6E6"/>
+    <path d="M84 -30 L98 -106 Q97 -114 90 -110 L24 -64 Z" fill="#FFF6E6"/>
+    <path d="M-84 -46 L-91 -92 L-48 -64 Z" fill="#F08A9B" opacity="0.95"/>
+    <path d="M84 -46 L91 -92 L48 -64 Z" fill="#F08A9B" opacity="0.95"/>
+    <path d="M0 -86 C58 -86 97 -54 97 -6 C97 48 56 84 0 84 C-56 84 -97 48 -97 -6 C-97 -54 -58 -86 0 -86 Z" fill="#FFF6E6"/>
+    <g stroke="#00000022" stroke-width="8" stroke-linecap="round" fill="none">
+      <path d="M0 -76 L0 -58"/>
+      <path d="M-22 -74 L-16 -58"/>
+      <path d="M22 -74 L16 -58"/>
+    </g>
+    <ellipse cx="-39" cy="-4" rx="16" ry="19" fill="#2A1A12"/>
+    <ellipse cx="39" cy="-4" rx="16" ry="19" fill="#2A1A12"/>
+    <circle cx="-33" cy="-11" r="5.5" fill="#FFFFFF"/>
+    <circle cx="45" cy="-11" r="5.5" fill="#FFFFFF"/>
+    <ellipse cx="-67" cy="30" rx="17" ry="9" fill="#F08A9B" opacity="0.5"/>
+    <ellipse cx="67" cy="30" rx="17" ry="9" fill="#F08A9B" opacity="0.5"/>
+    <ellipse cx="0" cy="35" rx="31" ry="23" fill="#00000014"/>
+    <path d="M0 25 L-12 35 L12 35 Z" fill="#F08A9B"/>
+    <g stroke="#2A1A12" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.6">
+      <path d="M0 35 L0 43"/>
+      <path d="M0 43 Q-11 53 -19 43"/>
+      <path d="M0 43 Q11 53 19 43"/>
+    </g>
+  </g>
+</svg>

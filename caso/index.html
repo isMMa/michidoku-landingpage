@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es" data-theme="noche">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Caso compartido · Michidoku</title>
+    <meta
+      name="description"
+      content="Te han retado a resolver un caso de Michidoku. Abre el enlace para jugar exactamente el mismo tablero."
+    />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#080b16" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Michidoku" />
+    <meta property="og:title" content="Caso compartido · Michidoku" />
+    <meta
+      property="og:description"
+      content="Un caso de deducción gatuna te espera. ¿Puedes encontrar al travieso?"
+    />
+    <meta property="og:image" content="https://michidoku.devcodelight.com/assets/icon.png" />
+    <link rel="icon" href="../assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Tema y idioma antes de pintar para evitar destellos.
+      (function () {
+        try {
+          var params = new URLSearchParams(location.search);
+          var tema = params.get('tema');
+          if (tema !== 'claro' && tema !== 'noche') {
+            tema = localStorage.getItem('michidoku-tema');
+          }
+          if (tema !== 'claro' && tema !== 'noche') {
+            tema = window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noche';
+          }
+          document.documentElement.dataset.theme = tema;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../legal.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <div class="page-shell">
+      <header class="page-header">
+        <div class="inner">
+          <a class="page-brand" href="../">
+            <img src="../assets/michidoku-icon.svg" alt="" width="38" height="38" />
+            <span>Michidoku</span>
+          </a>
+          <a class="back" href="../">Volver a la web</a>
+          <div class="lang-switch" role="group" aria-label="Idioma / Language">
+            <button type="button" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-main" id="contenido">
+        <section class="caso-card" id="caso" hidden>
+          <div class="caso-cat" id="caso-cat" aria-hidden="true"></div>
+          <p class="eyebrow" data-i18n="eyebrow">Caso compartido</p>
+          <h1 id="caso-title">Te han retado a un caso de Michidoku</h1>
+          <p class="lead" id="caso-lead"></p>
+
+          <div class="caso-chips">
+            <span class="caso-chip"
+              ><span data-i18n="chipSize">Tamaño</span> <b id="chip-size">—</b></span
+            >
+            <span class="caso-chip"
+              ><span data-i18n="chipGrid">Tablero</span> <b id="chip-grid">—</b></span
+            >
+            <span class="caso-chip"
+              ><span data-i18n="chipSeed">Semilla</span> <b id="chip-seed">—</b></span
+            >
+          </div>
+
+          <div class="caso-actions">
+            <a class="btn" id="abrir" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M8 5v14l11-7z" stroke-linejoin="round" />
+              </svg>
+              <span data-i18n="abrir">Abrir en Michidoku</span>
+            </a>
+            <button class="btn btn--ghost" id="copiar" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M15 5H6a2 2 0 0 0-2 2v9" />
+              </svg>
+              <span data-i18n="copiar">Copiar enlace</span>
+            </button>
+          </div>
+
+          <p class="caso-hint" id="caso-hint"></p>
+          <p class="caso-toast" id="caso-toast" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="caso-card" id="invalido" hidden>
+          <div class="caso-cat" id="invalido-cat" aria-hidden="true"></div>
+          <p class="eyebrow" data-i18n="errorEyebrow">Enlace no válido</p>
+          <h1 data-i18n="errorTitulo">Este enlace no lleva a ningún caso</h1>
+          <p class="lead" data-i18n="errorTexto">
+            Puede que falte el tamaño o la semilla, o que el enlace se haya copiado incompleto. Pide
+            que te lo compartan de nuevo.
+          </p>
+          <div class="caso-actions">
+            <a class="btn" href="../" data-i18n="errorBoton">Ir a la web de Michidoku</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="page-footer">
+        <div class="inner">
+          <span>© 2026 DevCodeLight · Michidoku</span>
+          <nav aria-label="Legal">
+            <a href="../terminos/" data-i18n="terminos">Condiciones de uso</a>
+            <a href="../privacidad/" data-i18n="privacidad">Privacidad</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../cats.js" defer></script>
+    <script src="caso.js" defer></script>
+  </body>
+</html>

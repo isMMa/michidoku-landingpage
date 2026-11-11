@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="es" data-theme="noche">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Política de privacidad · Michidoku</title>
+    <meta
+      name="description"
+      content="Qué datos trata Michidoku, dónde se guardan y cómo puedes controlarlos. Sin cuentas y sin servidores propios."
+    />
+    <meta name="theme-color" content="#080b16" />
+    <link rel="icon" href="../assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          var params = new URLSearchParams(location.search);
+          var tema = params.get('tema');
+          if (tema !== 'claro' && tema !== 'noche') tema = localStorage.getItem('michidoku-tema');
+          if (tema !== 'claro' && tema !== 'noche') {
+            tema = window.matchMedia('(prefers-color-scheme: light)').matches ? 'claro' : 'noche';
+          }
+          document.documentElement.dataset.theme = tema;
+          var lang = params.get('lang');
+          if (lang !== 'es' && lang !== 'en') lang = localStorage.getItem('michidoku-lang');
+          if (lang !== 'es' && lang !== 'en') {
+            lang = (navigator.language || 'es').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+          }
+          document.documentElement.lang = lang;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../legal.css" />
+  </head>
+  <body data-title-es="Política de privacidad · Michidoku" data-title-en="Privacy policy · Michidoku">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <div class="page-shell">
+      <header class="page-header">
+        <div class="inner">
+          <a class="page-brand" href="../">
+            <img src="../assets/michidoku-icon.svg" alt="" width="38" height="38" />
+            <span>Michidoku</span>
+          </a>
+          <a class="back" href="../">Volver a la web</a>
+          <div class="lang-switch" role="group" aria-label="Idioma / Language">
+            <button type="button" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-main" id="contenido">
+        <article class="doc-card" lang="es" data-lang-block="es">
+          <header class="doc-head">
+            <p class="eyebrow">Información legal</p>
+            <h1 class="doc-title">Política de privacidad</h1>
+            <p class="doc-lead">
+              Michidoku es un juego de deducción sin cuentas y sin servidores propios. Tu progreso
+              se queda en tu dispositivo. Aquí explicamos qué trata la app, para qué y cómo puedes
+              controlarlo.
+            </p>
+            <div class="doc-meta">
+              <span>Actualizado el 11 de noviembre de 2026</span>
+              <span>Versión 1.0</span>
+              <span>Lectura: 4 minutos</span>
+            </div>
+          </header>
+
+          <nav class="doc-toc" aria-label="Índice">
+            <p>En esta página</p>
+            <ol>
+              <li><a href="#responsable">Quién es el responsable</a></li>
+              <li><a href="#datos">Qué datos tratamos</a></li>
+              <li><a href="#finalidad">Para qué y con qué base legal</a></li>
+              <li><a href="#conservacion">Cuánto tiempo los conservamos</a></li>
+              <li><a href="#destinatarios">Con quién se comparten</a></li>
+              <li><a href="#internacional">Transferencias internacionales</a></li>
+              <li><a href="#derechos">Tus derechos</a></li>
+              <li><a href="#seguridad">Seguridad</a></li>
+              <li><a href="#menores">Menores de edad</a></li>
+              <li><a href="#cambios">Cambios en esta política</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ol>
+          </nav>
+
+          <div class="doc-prose">
+            <section id="responsable">
+              <h2>1. Quién es el responsable</h2>
+              <p>
+                El responsable del tratamiento es <strong>DevCodeLight</strong>, el proyecto
+                editorial y de desarrollo de <strong>Ismael González</strong>.
+              </p>
+              <ul>
+                <li><strong>Titular:</strong> DevCodeLight · Ismael González</li>
+                <li><strong>Actividad:</strong> desarrollo de aplicaciones y contenidos digitales</li>
+                <li>
+                  <strong>Correo de privacidad:</strong>
+                  <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a>
+                </li>
+              </ul>
+              <p>
+                No se ha designado un delegado de protección de datos porque la actividad no lo
+                exige.
+              </p>
+            </section>
+
+            <section id="datos">
+              <h2>2. Qué datos tratamos</h2>
+
+              <h3>Datos que se guardan solo en tu dispositivo</h3>
+              <p>
+                Michidoku no tiene registro ni inicio de sesión. La app guarda en el almacenamiento
+                local del teléfono (AsyncStorage) los datos necesarios para que puedas continuar
+                donde lo dejaste:
+              </p>
+              <ul>
+                <li>Partidas guardadas: tamaño y semilla del caso, celdas y notas.</li>
+                <li>Progreso: casos resueltos, estrellas, desbloqueos y puntos.</li>
+                <li>
+                  Preferencias: idioma, tema, sonido, vibración, animaciones y aviso diario.
+                </li>
+                <li>Tu gato: nombre, color y accesorio.</li>
+                <li>Si ya has visto el tutorial.</li>
+              </ul>
+              <p>
+                Estos datos <strong>no se envían a DevCodeLight ni a terceros</strong>. Puedes
+                borrarlos con <em>Borrar todo</em> en Ajustes o desinstalando la app.
+              </p>
+
+              <h3>Notificaciones</h3>
+              <p>
+                Si activas el recordatorio del caso diario, la app programa una
+                <strong>notificación local</strong> a las 19:00 con el sistema operativo. No se usa
+                ningún servidor de notificaciones ni se genera un token de dispositivo. Puedes
+                desactivarla en cualquier momento desde Ajustes o desde los ajustes del sistema.
+              </p>
+
+              <h3>Publicidad</h3>
+              <p>
+                La app muestra anuncios a través de <strong>Google AdMob</strong>. El SDK de Google
+                puede tratar identificadores del dispositivo o publicitarios, dirección IP, ubicación
+                aproximada, información del dispositivo y datos de interacción con los anuncios, con
+                las finalidades de mostrar publicidad, limitar la frecuencia, medir resultados y
+                prevenir el fraude.
+              </p>
+              <p>
+                Google actúa como proveedor independiente. En iOS se solicita el permiso de
+                seguimiento (App Tracking Transparency) cuando corresponde; si lo rechazas, se
+                muestran anuncios no personalizados. En el Espacio Económico Europeo y el Reino Unido
+                se solicitará el consentimiento que exija la normativa antes de usar datos para
+                publicidad personalizada.
+              </p>
+              <p>
+                Puedes consultar cómo trata Google estos datos en
+                <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer"
+                  >policies.google.com/technologies/partner-sites</a
+                >
+                y en la
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
+                  >política de privacidad de Google</a
+                >.
+              </p>
+
+              <h3>Enlaces de casos compartidos</h3>
+              <p>
+                Al compartir un caso se genera una dirección web con el tamaño y la semilla del
+                caso. <strong>No contiene datos personales</strong>: solo dos números. Si abres esa
+                dirección, el proveedor de alojamiento de la web puede registrar tu IP en sus
+                registros, como en cualquier visita a una página web.
+              </p>
+
+              <h3>Datos que no tratamos</h3>
+              <p>
+                No pedimos nombre, correo, teléfono ni contactos. No accedemos a tus fotos, cámara,
+                micrófono ni ubicación precisa. No usamos herramientas propias de analítica ni de
+                informes de fallos, y no hay compras dentro de la app.
+              </p>
+            </section>
+
+            <section id="finalidad">
+              <h2>3. Para qué y con qué base legal</h2>
+              <div class="doc-table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Finalidad</th>
+                      <th>Datos</th>
+                      <th>Base legal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Mostrar y financiar la app con anuncios</td>
+                      <td>Identificadores, IP, dispositivo e interacción con anuncios</td>
+                      <td>Consentimiento e interés legítimo</td>
+                    </tr>
+                    <tr>
+                      <td>Guardar tu progreso y preferencias en el dispositivo</td>
+                      <td>Partidas, estrellas, ajustes y gato</td>
+                      <td>No hay tratamiento por nuestra parte: no salen del dispositivo</td>
+                    </tr>
+                    <tr>
+                      <td>Programar el aviso diario</td>
+                      <td>Hora y estado de la notificación</td>
+                      <td>Consentimiento (permiso del sistema)</td>
+                    </tr>
+                    <tr>
+                      <td>Atender consultas por correo</td>
+                      <td>Dirección de correo y mensaje</td>
+                      <td>Consentimiento e interés legítimo</td>
+                    </tr>
+                    <tr>
+                      <td>Seguridad y prevención de fraude</td>
+                      <td>Registros técnicos del proveedor publicitario</td>
+                      <td>Interés legítimo</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                Puedes retirar tu consentimiento en cualquier momento sin que ello afecte al
+                tratamiento realizado antes de retirarlo.
+              </p>
+            </section>
+
+            <section id="conservacion">
+              <h2>4. Cuánto tiempo los conservamos</h2>
+              <ul>
+                <li>
+                  <strong>Datos locales:</strong> hasta que uses <em>Borrar todo</em> o desinstales
+                  la app.
+                </li>
+                <li>
+                  <strong>Publicidad:</strong> durante los plazos que fije Google en sus políticas.
+                </li>
+                <li>
+                  <strong>Correo:</strong> el tiempo necesario para responder a tu consulta y, si
+                  hay reclamación, durante el plazo legal aplicable.
+                </li>
+                <li>
+                  <strong>Registros del alojamiento web:</strong> el plazo técnico de seguridad del
+                  proveedor.
+                </li>
+              </ul>
+            </section>
+
+            <section id="destinatarios">
+              <h2>5. Con quién se comparten</h2>
+              <p>
+                No vendemos ni alquilamos datos personales. Solo intervienen los proveedores
+                necesarios:
+              </p>
+              <ul>
+                <li>
+                  <strong>Google LLC / Google Ireland Ltd.</strong> para la publicidad de AdMob.
+                </li>
+                <li>
+                  <strong>El proveedor de alojamiento de la web</strong>, que sirve esta página y
+                  los ficheros de verificación de enlaces.
+                </li>
+                <li>
+                  <strong>Las tiendas de aplicaciones</strong> (Google Play y App Store), cuando
+                  descargas o actualizas la app, conforme a sus propias políticas.
+                </li>
+              </ul>
+            </section>
+
+            <section id="internacional">
+              <h2>6. Transferencias internacionales</h2>
+              <p>
+                Algunos proveedores, especialmente Google, pueden tratar datos fuera del Espacio
+                Económico Europeo. En esos casos se apoyan en decisiones de adecuación de la
+                Comisión Europea o en las cláusulas contractuales tipo. Puedes obtener más
+                información en las políticas enlazadas de cada proveedor.
+              </p>
+            </section>
+
+            <section id="derechos">
+              <h2>7. Tus derechos</h2>
+              <p>
+                Puedes ejercer los derechos de acceso, rectificación, supresión, oposición,
+                limitación del tratamiento y portabilidad, así como retirar el consentimiento.
+              </p>
+              <p>
+                Escríbenos a
+                <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a> indicando qué
+                derecho quieres ejercer. Te responderemos en el plazo legal de un mes. Si no estás
+                conforme, puedes reclamar ante la Agencia Española de Protección de Datos
+                (<a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).
+              </p>
+              <p class="doc-note">
+                <strong>Atajo:</strong> como el progreso vive en tu teléfono, borrar los datos de la
+                app o desinstalarla elimina inmediatamente tus partidas, estrellas y preferencias.
+              </p>
+            </section>
+
+            <section id="seguridad">
+              <h2>8. Seguridad</h2>
+              <p>
+                Aplicamos medidas técnicas y organizativas razonables: los datos se guardan dentro
+                del espacio aislado de la app, la web se sirve por HTTPS y los enlaces de
+                verificación solo contienen la huella de firma de la aplicación. Ningún sistema es
+                infalible, pero trabajamos para que un incidente tenga el menor alcance posible.
+              </p>
+            </section>
+
+            <section id="menores">
+              <h2>9. Menores de edad</h2>
+              <p>
+                Michidoku es un juego de lógica apto para todos los públicos, pero no está dirigido
+                específicamente a menores de 14 años y no recogemos conscientemente sus datos. La
+                app no tiene cuentas ni funciones sociales. Si detectas que un menor nos ha enviado
+                datos personales, escríbenos y los eliminaremos.
+              </p>
+            </section>
+
+            <section id="cambios">
+              <h2>10. Cambios en esta política</h2>
+              <p>
+                Si cambia la forma de tratar los datos, publicaremos una nueva versión en esta misma
+                dirección y actualizaremos la fecha. Los cambios importantes se anunciarán también
+                en la app cuando sea posible.
+              </p>
+            </section>
+
+            <section id="contacto">
+              <h2>11. Contacto</h2>
+              <p>
+                Para cualquier duda sobre privacidad, escribe a
+                <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a>. También puedes
+                consultar las <a href="../terminos/">condiciones de uso</a>.
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <article class="doc-card" lang="en" data-lang-block="en">
+          <header class="doc-head">
+            <p class="eyebrow">Legal information</p>
+            <h1 class="doc-title">Privacy policy</h1>
+            <p class="doc-lead">
+              Michidoku is a deduction game with no accounts and no servers of its own. Your progress
+              stays on your device. Here we explain what the app processes, why, and how you can
+              control it.
+            </p>
+            <div class="doc-meta">
+              <span>Updated 11 November 2026</span>
+              <span>Version 1.0</span>
+              <span>4-minute read</span>
+            </div>
+          </header>
+
+          <nav class="doc-toc" aria-label="Contents">
+            <p>On this page</p>
+            <ol>
+              <li><a href="#controller">Who is the controller</a></li>
+              <li><a href="#data">What data we process</a></li>
+              <li><a href="#purpose">Why and on what legal basis</a></li>
+              <li><a href="#retention">How long we keep it</a></li>
+              <li><a href="#recipients">Who we share it with</a></li>
+              <li><a href="#transfers">International transfers</a></li>
+              <li><a href="#rights">Your rights</a></li>
+              <li><a href="#security">Security</a></li>
+              <li><a href="#children">Children</a></li>
+              <li><a href="#changes">Changes to this policy</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ol>
+          </nav>
+
+          <div class="doc-prose">
+            <section id="controller">
+              <h2>1. Who is the controller</h2>
+              <p>
+                The data controller is <strong>DevCodeLight</strong>, the editorial and development
+                project of <strong>Ismael González</strong>.
+              </p>
+              <ul>
+                <li><strong>Owner:</strong> DevCodeLight · Ismael González</li>
+                <li><strong>Activity:</strong> app development and digital content</li>
+                <li>
+                  <strong>Privacy email:</strong>
+                  <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a>
+                </li>
+              </ul>
+              <p>
+                No data protection officer has been appointed because the activity does not require
+                one.
+              </p>
+            </section>
+
+            <section id="data">
+              <h2>2. What data we process</h2>
+
+              <h3>Data stored only on your device</h3>
+              <p>
+                Michidoku has no sign-up or login. The app stores the data it needs on your phone's
+                local storage (AsyncStorage) so you can pick up where you left off:
+              </p>
+              <ul>
+                <li>Saved games: case size and seed, cells and notes.</li>
+                <li>Progress: solved cases, stars, unlocks and points.</li>
+                <li>Preferences: language, theme, sound, vibration, animations and daily reminder.</li>
+                <li>Your cat: name, colour and accessory.</li>
+                <li>Whether you have already seen the tutorial.</li>
+              </ul>
+              <p>
+                This data is <strong>not sent to DevCodeLight or to third parties</strong>. You can
+                erase it with <em>Delete all</em> in Settings or by uninstalling the app.
+              </p>
+
+              <h3>Notifications</h3>
+              <p>
+                If you enable the daily case reminder, the app schedules a
+                <strong>local notification</strong> at 19:00 through the operating system. No push
+                server is used and no device token is generated. You can turn it off at any time in
+                Settings or in your system settings.
+              </p>
+
+              <h3>Advertising</h3>
+              <p>
+                The app shows ads through <strong>Google AdMob</strong>. Google's SDK may process
+                device or advertising identifiers, IP address, approximate location, device
+                information and ad interaction data in order to serve ads, limit frequency, measure
+                results and prevent fraud.
+              </p>
+              <p>
+                Google acts as an independent provider. On iOS, App Tracking Transparency permission
+                is requested where applicable; if you decline, non-personalised ads are shown. In the
+                European Economic Area and the United Kingdom, any consent required by law will be
+                requested before using data for personalised advertising.
+              </p>
+              <p>
+                You can read how Google handles this data at
+                <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer"
+                  >policies.google.com/technologies/partner-sites</a
+                >
+                and in Google's
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
+                  >privacy policy</a
+                >.
+              </p>
+
+              <h3>Shared case links</h3>
+              <p>
+                Sharing a case generates a web address containing the case size and seed. It
+                <strong>contains no personal data</strong>: just two numbers. If you open that
+                address, the website's hosting provider may log your IP address, as with any web
+                visit.
+              </p>
+
+              <h3>Data we do not process</h3>
+              <p>
+                We do not ask for your name, email, phone number or contacts. We do not access your
+                photos, camera, microphone or precise location. We use no analytics or crash
+                reporting of our own, and there are no in-app purchases.
+              </p>
+            </section>
+
+            <section id="purpose">
+              <h2>3. Why and on what legal basis</h2>
+              <div class="doc-table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Purpose</th>
+                      <th>Data</th>
+                      <th>Legal basis</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Show ads and fund the app</td>
+                      <td>Identifiers, IP, device and ad interaction</td>
+                      <td>Consent and legitimate interest</td>
+                    </tr>
+                    <tr>
+                      <td>Save your progress and preferences on the device</td>
+                      <td>Games, stars, settings and cat</td>
+                      <td>No processing on our side: it never leaves the device</td>
+                    </tr>
+                    <tr>
+                      <td>Schedule the daily reminder</td>
+                      <td>Time and notification status</td>
+                      <td>Consent (system permission)</td>
+                    </tr>
+                    <tr>
+                      <td>Answer email enquiries</td>
+                      <td>Email address and message</td>
+                      <td>Consent and legitimate interest</td>
+                    </tr>
+                    <tr>
+                      <td>Security and fraud prevention</td>
+                      <td>Technical logs from the ad provider</td>
+                      <td>Legitimate interest</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                You may withdraw your consent at any time without affecting processing carried out
+                before withdrawal.
+              </p>
+            </section>
+
+            <section id="retention">
+              <h2>4. How long we keep it</h2>
+              <ul>
+                <li>
+                  <strong>Local data:</strong> until you use <em>Delete all</em> or uninstall the
+                  app.
+                </li>
+                <li><strong>Advertising:</strong> for the periods set by Google in its policies.</li>
+                <li>
+                  <strong>Email:</strong> as long as needed to answer your enquiry and, if there is a
+                  claim, for the applicable legal period.
+                </li>
+                <li>
+                  <strong>Web hosting logs:</strong> the provider's technical security period.
+                </li>
+              </ul>
+            </section>
+
+            <section id="recipients">
+              <h2>5. Who we share it with</h2>
+              <p>We do not sell or rent personal data. Only the necessary providers are involved:</p>
+              <ul>
+                <li><strong>Google LLC / Google Ireland Ltd.</strong> for AdMob advertising.</li>
+                <li>
+                  <strong>The website hosting provider</strong>, which serves this page and the link
+                  verification files.
+                </li>
+                <li>
+                  <strong>The app stores</strong> (Google Play and App Store) when you download or
+                  update the app, under their own policies.
+                </li>
+              </ul>
+            </section>
+
+            <section id="transfers">
+              <h2>6. International transfers</h2>
+              <p>
+                Some providers, especially Google, may process data outside the European Economic
+                Area. In such cases they rely on European Commission adequacy decisions or standard
+                contractual clauses. You can find more information in each provider's linked
+                policies.
+              </p>
+            </section>
+
+            <section id="rights">
+              <h2>7. Your rights</h2>
+              <p>
+                You may exercise your rights of access, rectification, erasure, objection,
+                restriction of processing and portability, and withdraw your consent.
+              </p>
+              <p>
+                Write to
+                <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a> stating which right
+                you wish to exercise. We will reply within the legal one-month period. If you are not
+                satisfied, you can lodge a complaint with the Spanish Data Protection Agency
+                (<a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).
+              </p>
+              <p class="doc-note">
+                <strong>Shortcut:</strong> because progress lives on your phone, clearing the app's
+                data or uninstalling it immediately removes your games, stars and preferences.
+              </p>
+            </section>
+
+            <section id="security">
+              <h2>8. Security</h2>
+              <p>
+                We apply reasonable technical and organisational measures: data is stored inside the
+                app sandbox, the website is served over HTTPS and the verification files only contain
+                the app's signing fingerprint. No system is infallible, but we work to keep any
+                incident as limited as possible.
+              </p>
+            </section>
+
+            <section id="children">
+              <h2>9. Children</h2>
+              <p>
+                Michidoku is a logic game suitable for all audiences, but it is not specifically
+                directed at children under 14 and we do not knowingly collect their data. The app has
+                no accounts or social features. If you believe a child has sent us personal data,
+                contact us and we will delete it.
+              </p>
+            </section>
+
+            <section id="changes">
+              <h2>10. Changes to this policy</h2>
+              <p>
+                If the way we process data changes, we will publish a new version at this same
+                address and update the date. Significant changes will also be announced in the app
+                where possible.
+              </p>
+            </section>
+
+            <section id="contact">
+              <h2>11. Contact</h2>
+              <p>
+                For any privacy question, write to
+                <a href="mailto:hola@devcodelight.com">hola@devcodelight.com</a>. You can also read
+                the <a href="../terminos/">terms of use</a>.
+              </p>
+            </section>
+          </div>
+        </article>
+      </main>
+
+      <footer class="page-footer">
+        <div class="inner">
+          <span>© 2026 DevCodeLight · Michidoku</span>
+          <nav aria-label="Legal">
+            <a href="../terminos/">Condiciones de uso · Terms</a>
+            <a href="../privacidad/">Privacidad · Privacy</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../legal.js" defer></script>
+  </body>
+</html>
