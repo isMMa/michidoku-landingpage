@@ -5,6 +5,11 @@
 (function () {
   'use strict';
 
+  var Sonidos = window.MichidokuSonidos;
+  function sonar(tipo) {
+    if (Sonidos) Sonidos.reproducir(tipo);
+  }
+
   var TEXTOS = {
     es: {
       title: function (medidas) {
@@ -130,6 +135,7 @@
     idioma = nuevo === 'en' ? 'en' : 'es';
     var t = TEXTOS[idioma];
     document.documentElement.lang = idioma;
+    if (Sonidos) Sonidos.idioma(idioma);
 
     Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (boton) {
       boton.setAttribute('aria-pressed', String(boton.getAttribute('data-lang') === idioma));
@@ -267,6 +273,7 @@
 
     Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (boton) {
       boton.addEventListener('click', function () {
+        sonar('seleccion');
         aplicarIdioma(boton.getAttribute('data-lang'));
         t = TEXTOS[idioma];
         if (chipSize) chipSize.textContent = t.dificultad[size];
@@ -278,6 +285,7 @@
     if (copiarBoton) {
       copiarBoton.addEventListener('click', function () {
         copiar(window.location.href, function (ok) {
+          sonar(ok ? 'exito' : 'aviso');
           if (!toast) return;
           toast.textContent = ok ? TEXTOS[idioma].copiado : TEXTOS[idioma].copiarError;
         });
@@ -286,6 +294,7 @@
 
     if (abrir) {
       abrir.addEventListener('click', function () {
+        sonar('seleccion');
         if (toast) toast.textContent = TEXTOS[idioma].abriendo;
         // Deja que el navegador procese el esquema y, si no ocurre nada,
         // muestra las instrucciones de respaldo.

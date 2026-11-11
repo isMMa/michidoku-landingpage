@@ -71,6 +71,10 @@
             <span>Michidoku</span>
           </a>
           <a class="back" href="../">Volver a la web</a>
+          <button class="icon-btn sound-toggle" type="button" data-sound-toggle aria-pressed="true" aria-label="Sonido" title="Silenciar sonido">
+            <svg class="icon-sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.4h3.1L12.2 5v14L7.1 14.6H4z" fill="currentColor"/><path d="M15.4 9.2a4.1 4.1 0 0 1 0 5.6M18 6.6a7.7 7.7 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg class="icon-sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.4h3.1L12.2 5v14L7.1 14.6H4z" fill="currentColor"/><path d="m15.4 9.4 5 5M20.4 9.4l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
           <div class="lang-switch" role="group" aria-label="Idioma / Language">
             <button type="button" data-lang="es" aria-pressed="true">ES</button>
             <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -142,6 +146,7 @@
       </footer>
     </div>
 
+    <script src="../sonidos.js" defer></script>
     <script src="../cats.js" defer></script>
     <script src="caso.js" defer></script>
     <script src="../pwa.js" defer></script>

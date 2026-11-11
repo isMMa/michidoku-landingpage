@@ -22,6 +22,8 @@
   }
 
   function aplicar(idioma) {
+    idioma = idioma === 'en' ? 'en' : 'es';
+    if (window.MichidokuSonidos) window.MichidokuSonidos.idioma(idioma);
     document.documentElement.lang = idioma;
     Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (boton) {
       boton.setAttribute('aria-pressed', String(boton.getAttribute('data-lang') === idioma));
@@ -60,6 +62,7 @@
     montarCorreos();
     Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (boton) {
       boton.addEventListener('click', function () {
+        if (window.MichidokuSonidos) window.MichidokuSonidos.reproducir('seleccion');
         aplicar(boton.getAttribute('data-lang'));
       });
     });

@@ -509,6 +509,23 @@ p {
   height: 19px;
 }
 
+/* Interruptor de sonido: altavoz con ondas o altavoz tachado. */
+.sound-toggle .icon-sound-off {
+  display: none;
+}
+
+.sound-toggle[aria-pressed='false'] .icon-sound-on {
+  display: none;
+}
+
+.sound-toggle[aria-pressed='false'] .icon-sound-off {
+  display: block;
+}
+
+.sound-toggle[aria-pressed='false'] {
+  color: var(--muted);
+}
+
 [data-theme='noche'] .icon-sun,
 [data-theme='claro'] .icon-moon {
   display: none;

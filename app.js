@@ -5,6 +5,11 @@
   var Cats = window.MichidokuCats;
   if (!Cats) return;
 
+  var Sonidos = window.MichidokuSonidos;
+  function sonar(tipo) {
+    if (Sonidos) Sonidos.reproducir(tipo);
+  }
+
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (selector, scope) { return (scope || document).querySelector(selector); };
   var $$ = function (selector, scope) { return Array.prototype.slice.call((scope || document).querySelectorAll(selector)); };
@@ -53,6 +58,7 @@
 
   themeButtons.forEach(function (button) {
     button.addEventListener('click', function () {
+      sonar('toque');
       applyThemeMode(button.dataset.themeMode, true);
     });
   });
@@ -92,6 +98,7 @@
 
   if (navToggle && nav) {
     navToggle.addEventListener('click', function () {
+      sonar('toque');
       var open = !nav.classList.contains('is-open');
       nav.classList.toggle('is-open', open);
       navToggle.setAttribute('aria-expanded', String(open));
@@ -179,8 +186,12 @@
   }
 
   if (heroCatHost) renderHero('Misi');
+  if (heroCatHost) {
+    heroCatHost.addEventListener('click', function () { sonar('toque'); });
+  }
   if (heroRandom) {
     heroRandom.addEventListener('click', function () {
+      sonar('seleccion');
       var next = Math.random() < 0.09 ? 'Dorado' : Cats.randomName(heroCurrent);
       renderHero(next);
     });
@@ -328,6 +339,7 @@
       clue.addEventListener('mouseleave', function () { if (!pinned) paintActive(null); });
       clue.addEventListener('blur', function () { if (!pinned) paintActive(null); });
       clue.addEventListener('click', function () {
+        sonar('seleccion');
         pinned = pinned === name ? null : name;
         paintActive(pinned);
       });
@@ -339,6 +351,7 @@
       cat.addEventListener('focus', function () { paintActive(cat.dataset.cat); });
       cat.addEventListener('blur', function () { paintActive(pinned); });
       cat.addEventListener('click', function () {
+        sonar('toque');
         pinned = pinned === cat.dataset.cat ? null : cat.dataset.cat;
         paintActive(pinned);
       });
@@ -421,6 +434,7 @@
     $$('.gallery-cat', galleryHost).forEach(function (item) {
       item.classList.toggle('is-active', item.dataset.name === currentName);
       item.addEventListener('click', function () {
+        sonar('toque');
         if (nameInput) nameInput.value = item.dataset.name;
         renderPreview(item.dataset.name);
       });
@@ -460,6 +474,7 @@
   var randomButton = $('#cat-random');
   if (randomButton) {
     randomButton.addEventListener('click', function () {
+      sonar('seleccion');
       var next = Cats.randomName(currentName);
       if (nameInput) nameInput.value = next;
       renderPreview(next);
@@ -469,6 +484,7 @@
   var againButton = $('#cat-again');
   if (againButton) {
     againButton.addEventListener('click', function () {
+      sonar('seleccion');
       var next = Math.random() < 0.07 ? 'Dorado' : Cats.randomName(currentName);
       if (nameInput) nameInput.value = next;
       currentAccessory = '';
@@ -479,6 +495,7 @@
 
   accessoryChips.forEach(function (chip) {
     chip.addEventListener('click', function () {
+      sonar('seleccion');
       currentAccessory = chip.dataset.accessory || '';
       accessoryChips.forEach(function (other) { other.classList.toggle('is-active', other === chip); });
       renderPreview(currentName);
@@ -488,6 +505,7 @@
   var galleryRefresh = $('#gallery-refresh');
   if (galleryRefresh) {
     galleryRefresh.addEventListener('click', function () {
+      sonar('seleccion');
       buildGallery(randomGallery(12));
     });
   }
@@ -510,6 +528,7 @@
       document.body.appendChild(link);
       link.click();
       link.remove();
+      sonar('exito');
       setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
     });
   }
@@ -526,6 +545,7 @@
       size: 440,
       label: 'El legendario gato dorado con corona',
     });
+    goldenHost.addEventListener('click', function () { sonar('toque'); });
   }
 
   var ctaCats = $('#cta-cats');
@@ -540,6 +560,7 @@
         label: 'Michi ' + name,
       });
       ctaCats.appendChild(wrapper.firstElementChild);
+      wrapper.firstElementChild.addEventListener('click', function () { sonar('toque'); });
     });
   }
 
@@ -550,6 +571,7 @@
   var storeNote = $('#store-note');
   $$('[data-store]').forEach(function (button) {
     button.addEventListener('click', function () {
+      sonar('aviso');
       if (!storeNote) return;
       var store = button.dataset.store === 'ios' ? 'App Store' : 'Google Play';
       storeNote.textContent = 'Todavía estamos afinando la última versión para ' + store + '. Vuelve pronto: la casa abre sus puertas muy pronto.';
