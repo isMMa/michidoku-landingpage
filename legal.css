@@ -465,6 +465,21 @@
   display: none !important;
 }
 
+/* Modo móvil incrustado: con ?mobile=1 se ocultan la barra superior y el pie
+   para dejar solo el documento a pantalla completa. */
+html[data-mobile='1'] .page-header,
+html[data-mobile='1'] .page-footer {
+  display: none !important;
+}
+
+html[data-mobile='1'] .page-main {
+  padding-top: clamp(24px, 5vw, 44px);
+}
+
+html[data-mobile='1'] .doc-prose section {
+  scroll-margin-top: 20px;
+}
+
 /* Documentos bilingües: sin JS se muestra el español y se oculta el inglés. */
 [data-lang-block='en'] {
   display: none;
