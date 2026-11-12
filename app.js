@@ -9,6 +9,9 @@
   function sonar(tipo) {
     if (Sonidos) Sonidos.reproducir(tipo);
   }
+  function maullar() {
+    if (Sonidos && typeof Sonidos.maullar === 'function') Sonidos.maullar();
+  }
 
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (selector, scope) { return (scope || document).querySelector(selector); };
@@ -260,7 +263,7 @@
 
   if (heroCatHost) renderHero('Misi');
   if (heroCatHost) {
-    heroCatHost.addEventListener('click', function () { sonar('seleccion'); });
+    heroCatHost.addEventListener('click', function () { maullar(); });
   }
   if (heroRandom) {
     heroRandom.addEventListener('click', function () {
@@ -424,7 +427,7 @@
       cat.addEventListener('focus', function () { paintActive(cat.dataset.cat); });
       cat.addEventListener('blur', function () { paintActive(pinned); });
       cat.addEventListener('click', function () {
-        sonar('seleccion');
+        maullar();
         pinned = pinned === cat.dataset.cat ? null : cat.dataset.cat;
         paintActive(pinned);
       });
@@ -507,7 +510,7 @@
     $$('.gallery-cat', galleryHost).forEach(function (item) {
       item.classList.toggle('is-active', item.dataset.name === currentName);
       item.addEventListener('click', function () {
-        sonar('seleccion');
+        maullar();
         if (nameInput) nameInput.value = item.dataset.name;
         renderPreview(item.dataset.name);
       });
@@ -618,7 +621,7 @@
       size: 440,
       label: 'El legendario gato dorado con corona',
     });
-    goldenHost.addEventListener('click', function () { sonar('seleccion'); });
+    goldenHost.addEventListener('click', function () { maullar(); });
   }
 
   var ctaCats = $('#cta-cats');
@@ -633,7 +636,7 @@
         label: 'Michi ' + name,
       });
       ctaCats.appendChild(wrapper.firstElementChild);
-      wrapper.firstElementChild.addEventListener('click', function () { sonar('seleccion'); });
+      wrapper.firstElementChild.addEventListener('click', function () { maullar(); });
     });
   }
 

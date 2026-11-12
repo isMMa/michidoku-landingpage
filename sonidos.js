@@ -1,10 +1,12 @@
 /* Michidoku · sonidos compartidos con la app.
    Replica los cuatro avisos de michidoku-catgame/src/util/sonidos.ts:
-   toque, seleccion, exito y aviso. */
+   toque, seleccion, exito y aviso. Añade además los maullidos de la web
+   (assets/sonidos/meow/meow_1.mp3 … meow_7.mp3), que se eligen al azar. */
 (function (global) {
   'use strict';
 
   var TIPOS = ['toque', 'seleccion', 'exito', 'aviso'];
+  var MAULLIDOS = 7;
   var VOLUMEN = 0.7;
   var CLAVE = 'michidoku-sonido';
   var ETIQUETAS = {
@@ -23,6 +25,8 @@
   }
 
   var jugadores = {};
+  var maullidosActivos = [];
+  var maullidosPrecargados = {};
   var botones = [];
   var idioma = 'es';
   var activo = leerPreferencia();
@@ -51,6 +55,47 @@
     } catch (error) { /* audio no disponible */ }
   }
 
+  function rutaMaullido(numero) {
+    return base + 'meow/meow_' + numero + '.mp3';
+  }
+
+  function crearMaullido(numero) {
+    var audio = new Audio(rutaMaullido(numero));
+    audio.preload = 'auto';
+    audio.volume = VOLUMEN;
+    return audio;
+  }
+
+  // Maullido al azar de los siete. Cada pulsación crea su propio reproductor
+  // para que el sonido anterior termine entero en lugar de cortarse.
+  function maullar() {
+    if (!activo) return;
+    var numero = 1 + Math.floor(Math.random() * MAULLIDOS);
+    try {
+      var jugador = crearMaullido(numero);
+      maullidosActivos.push(jugador);
+      var liberar = function () {
+        var posicion = maullidosActivos.indexOf(jugador);
+        if (posicion !== -1) maullidosActivos.splice(posicion, 1);
+      };
+      jugador.addEventListener('ended', liberar);
+      jugador.addEventListener('error', liberar);
+      var intento = jugador.play();
+      if (intento && typeof intento.catch === 'function') intento.catch(liberar);
+    } catch (error) { /* audio no disponible */ }
+  }
+
+  function precargarMaullidos() {
+    for (var numero = 1; numero <= MAULLIDOS; numero++) {
+      if (maullidosPrecargados[numero]) continue;
+      try {
+        var audio = crearMaullido(numero);
+        maullidosPrecargados[numero] = audio;
+        audio.load();
+      } catch (error) { /* sin audio */ }
+    }
+  }
+
   function textos() {
     return ETIQUETAS[idioma] || ETIQUETAS.es;
   }
@@ -76,7 +121,10 @@
 
   function alternar() {
     fijar(!activo, true);
-    if (activo) reproducir('seleccion');
+    if (activo) {
+      precargarMaullidos();
+      reproducir('seleccion');
+    }
   }
 
   function cambiarIdioma(nuevo) {
@@ -91,10 +139,12 @@
       boton.addEventListener('click', alternar);
     });
     pintar();
+    if (activo) precargarMaullidos();
   }
 
   global.MichidokuSonidos = {
     reproducir: reproducir,
+    maullar: maullar,
     alternar: alternar,
     estaActivo: function () { return activo; },
     fijar: fijar,
