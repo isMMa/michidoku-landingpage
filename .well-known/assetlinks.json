@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.michidoku.catgame",
       "sha256_cert_fingerprints": [
-        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"
+        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C",
+        "74:FF:D2:04:77:4B:A9:52:70:68:74:CB:0F:2C:4E:10:9F:42:7B:E5:74:37:26:51:84:23:4B:0C:F3:15:72:00"
       ]
     }
   }
