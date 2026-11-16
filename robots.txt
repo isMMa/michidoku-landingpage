@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://michidoku.devcodelight.com/sitemap.xml
+Sitemap: https://not-me-meow.devcodelight.com/sitemap.xml

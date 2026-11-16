@@ -2,7 +2,7 @@
 
 ## Repo facts
 
-Static, dependency-free landing page for **Not me Meow!**, published to GitHub Pages at `https://michidoku.devcodelight.com`. There is no build step, package manager, test suite, lint, or formatter. The repository root is the deployable site.
+Static, dependency-free landing page for **Not me Meow!**, published to GitHub Pages at `https://not-me-meow.devcodelight.com`. There is no build step, package manager, test suite, lint, or formatter. The repository root is the deployable site.
 
 ## Commands
 

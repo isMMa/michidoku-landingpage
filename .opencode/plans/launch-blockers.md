@@ -1,7 +1,7 @@
 # Plan de lanzamiento · bloqueos pendientes
 
 Estado a 11 nov 2026: el sitio ya está publicado en
-`https://michidoku.devcodelight.com` (GitHub Pages + dominio propio, HTTPS
+`https://not-me-meow.devcodelight.com` (GitHub Pages + dominio propio, HTTPS
 forzado). Lo que queda son los tres bloqueos que detecta
 `.opencode/skills/release-audit/scripts/audit-release.mjs`.
 
@@ -26,7 +26,7 @@ node .opencode/skills/release-audit/scripts/audit-release.mjs
      (GitHub Pages ya sirve JSON para archivos sin extensión; verificar con
      `curl -I`).
   4. Validar en un dispositivo real abriendo
-     `https://michidoku.devcodelight.com/caso/?size=6&seed=123`.
+     `https://not-me-meow.devcodelight.com/caso/?size=6&seed=123`.
 
 ## 2. App Links de Android
 
@@ -36,7 +36,7 @@ node .opencode/skills/release-audit/scripts/audit-release.mjs
   1. Obtener la huella del keystore de producción:
      `keytool -list -v -keystore <keystore> -alias <alias>` (SHA-256).
   2. Sustituirla en `.well-known/assetlinks.json` manteniendo el paquete
-     `com.michidoku.catgame`.
+     `com.michidoku`.
   3. Verificar con
      `https://developers.google.com/digital-asset-links/tools/generator`.
   4. Probar el deep link `michidoku://caso?size=6&seed=123` en un dispositivo

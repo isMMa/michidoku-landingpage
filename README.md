@@ -1,6 +1,6 @@
 # Not me Meow! · landing
 
-Landing estática de **Not me Meow!**, el juego de deducción gatuna. Está pensada para GitHub Pages y para el dominio **https://michidoku.devcodelight.com**.
+Landing estática de **Not me Meow!**, el juego de deducción gatuna. Está pensada para GitHub Pages y para el dominio **https://not-me-meow.devcodelight.com**.
 
 No necesita build, dependencias ni framework: HTML, CSS y JavaScript puro. Los gatos animados son SVG generados en el navegador con el mismo ADN que usa el juego.
 
@@ -93,7 +93,7 @@ Prueba la PWA en local con `python -m http.server 8080`: en Chrome, DevTools →
 1. Sube el contenido a la rama `main` del repositorio `isMMa/michidoku-landingpage`.
 2. En **Settings → Pages**, elige **Source: GitHub Actions**.
 3. El workflow `.github/workflows/deploy.yml` publica el sitio en cada push a `main`.
-4. En **Settings → Pages → Custom domain**, escribe `michidoku.devcodelight.com` (el archivo `CNAME` ya lo incluye).
+4. En **Settings → Pages → Custom domain**, escribe `not-me-meow.devcodelight.com` (el archivo `CNAME` ya lo incluye).
 5. En el DNS del dominio `devcodelight.com`, crea un registro:
 
    | Tipo  | Nombre      | Valor              |
@@ -111,7 +111,7 @@ Prueba la PWA en local con `python -m http.server 8080`: en Chrome, DevTools →
 El juego comparte casos con URLs del tipo:
 
 ```
-https://michidoku.devcodelight.com/caso?size=6&seed=123
+https://not-me-meow.devcodelight.com/caso?size=6&seed=123
 ```
 
 La página `caso/index.html`:
@@ -148,7 +148,7 @@ Ahora mismo los botones de descarga son informativos (“Muy pronto”) porque l
 1. En `index.html`, cambia los `<button class="store-badge" data-store="android">` y `data-store="ios"` por enlaces:
 
    ```html
-   <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.michidoku.catgame" target="_blank" rel="noreferrer">…</a>
+   <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.michidoku" target="_blank" rel="noreferrer">…</a>
    ```
 
 2. Ajusta el texto de `#store-note` y las etiquetas “Pronto”.

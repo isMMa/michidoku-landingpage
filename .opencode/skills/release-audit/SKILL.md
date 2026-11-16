@@ -34,13 +34,13 @@ description: Use before publishing or announcing Not me Meow!, when changing app
   `.example`; `REPLACE_WITH_APPLE_TEAM_ID` must not be published as the final
   value.
 - `.well-known/assetlinks.json` must contain the production SHA-256
-  fingerprint and package `com.michidoku.catgame`.
+  fingerprint and package `com.michidoku`.
 - Store badges must become real links (`<a href=...>`) only when the store
   listings exist; do not link to unpublished listings.
 - Deployment is push-to-`main`; do not add a manual build or change the
   artifact exclusions without checking the workflow.
 - `CNAME` and all canonical/OG/sitemap URLs must use
-  `https://michidoku.devcodelight.com`.
+  `https://not-me-meow.devcodelight.com`.
 - Never commit signing secrets, keystores, API keys, or private store
   credentials. The deploy workflow publishes the whole repo root except
   `.git`, `.github`, `_site`, and `README.md`.

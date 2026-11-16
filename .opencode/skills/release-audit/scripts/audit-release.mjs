@@ -33,15 +33,15 @@ const required = [
 required.forEach(requireFile);
 
 const cname = existsSync(join(root, 'CNAME')) ? read('CNAME').trim() : '';
-if (cname !== 'michidoku.devcodelight.com') {
-  fail(`CNAME: expected michidoku.devcodelight.com, found ${cname || '(empty)'}`);
+if (cname !== 'not-me-meow.devcodelight.com') {
+  fail(`CNAME: expected not-me-meow.devcodelight.com, found ${cname || '(empty)'}`);
 }
 
 if (existsSync(join(root, '.well-known/assetlinks.json'))) {
   try {
     const data = JSON.parse(read('.well-known/assetlinks.json'));
     const target = data?.[0]?.target;
-    if (target?.package_name !== 'com.michidoku.catgame') {
+    if (target?.package_name !== 'com.michidoku') {
       fail(`assetlinks.json: unexpected package ${target?.package_name || '(missing)'}`);
     }
     const fingerprints = target?.sha256_cert_fingerprints || [];
@@ -69,8 +69,8 @@ if (existsSync(aasaPath)) {
     const data = JSON.parse(source);
     const details = data?.applinks?.details || [];
     const appIds = details.flatMap((entry) => entry.appIDs || []);
-    if (!appIds.some((id) => id.endsWith('.com.michidoku.catgame'))) {
-      fail('apple-app-site-association: missing appID ending in .com.michidoku.catgame');
+    if (!appIds.some((id) => id.endsWith('.com.michidoku'))) {
+      fail('apple-app-site-association: missing appID ending in .com.michidoku');
     }
     const paths = details.flatMap((entry) => (entry.components || []).map((item) => item['/']));
     if (!paths.includes('/caso')) {

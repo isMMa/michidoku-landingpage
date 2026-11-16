@@ -140,8 +140,8 @@ for (const asset of ['/styles.css', '/app.js', '/cats.js', '/pwa.js', '/offline.
 }
 
 const cname = read('CNAME').trim();
-if (cname !== 'michidoku.devcodelight.com') {
-  fail(`CNAME: expected michidoku.devcodelight.com, found ${cname || '(empty)'}`);
+if (cname !== 'not-me-meow.devcodelight.com') {
+  fail(`CNAME: expected not-me-meow.devcodelight.com, found ${cname || '(empty)'}`);
 }
 
 const sitemap = read('sitemap.xml');

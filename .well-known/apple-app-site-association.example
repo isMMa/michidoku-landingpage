@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appIDs": ["REPLACE_WITH_APPLE_TEAM_ID.com.michidoku.catgame"],
+        "appIDs": ["REPLACE_WITH_APPLE_TEAM_ID.com.michidoku"],
         "components": [
           {
             "/": "/caso",

@@ -12,7 +12,7 @@
 - Create `.well-known/apple-app-site-association` from
   `.well-known/apple-app-site-association.example` and replace
   `REPLACE_WITH_APPLE_TEAM_ID` with the real Apple Team ID. The `appID` must
-  remain `<TEAM_ID>.com.michidoku.catgame` and the component path must remain
+  remain `<TEAM_ID>.com.michidoku` and the component path must remain
   `/caso`.
 - Verify `michidoku://caso?size=6&seed=123` opens a production build on real
   Android and iOS devices from the public HTTPS URL, not just locally.
@@ -33,7 +33,7 @@
 
 - GitHub Pages source must be **GitHub Actions**; pushes to `main` deploy via
   `.github/workflows/deploy.yml`.
-- `CNAME` must be `michidoku.devcodelight.com`; DNS should be a CNAME from
+- `CNAME` must be `not-me-meow.devcodelight.com`; DNS should be a CNAME from
   `michidoku` to `ismma.github.io.`.
 - Wait for GitHub DNS validation, then enable **Enforce HTTPS**.
 - `.nojekyll` must stay present so paths such as `.well-known/` are served.
