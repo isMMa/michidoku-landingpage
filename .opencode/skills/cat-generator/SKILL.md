@@ -1,9 +1,9 @@
 ---
-name: Michidoku cat generator
-description: Use when changing cats.js, cat names, DNA generation, SVG rendering, accessories, golden cats, cat animations, or anything that must stay visually and deterministically compatible with the Michidoku game.
+name: Not me Meow! cat generator
+description: Use when changing cats.js, cat names, DNA generation, SVG rendering, accessories, golden cats, cat animations, or anything that must stay visually and deterministically compatible with the Not me Meow! game.
 ---
 
-# Michidoku cat generator
+# Not me Meow! cat generator
 
 ## Workflow
 

@@ -1,9 +1,9 @@
 ---
-name: Michidoku release audit
-description: Use before publishing or announcing Michidoku, when changing app-link files, store buttons, CNAME, sitemap, or the GitHub Pages deploy workflow, or when asked whether the site is launch-ready.
+name: Not me Meow! release audit
+description: Use before publishing or announcing Not me Meow!, when changing app-link files, store buttons, CNAME, sitemap, or the GitHub Pages deploy workflow, or when asked whether the site is launch-ready.
 ---
 
-# Michidoku release audit
+# Not me Meow! release audit
 
 ## Workflow
 

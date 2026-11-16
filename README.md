@@ -1,6 +1,6 @@
-# Michidoku · landing
+# Not me Meow! · landing
 
-Landing estática de **Michidoku**, el juego de deducción gatuna. Está pensada para GitHub Pages y para el dominio **https://michidoku.devcodelight.com**.
+Landing estática de **Not me Meow!**, el juego de deducción gatuna. Está pensada para GitHub Pages y para el dominio **https://michidoku.devcodelight.com**.
 
 No necesita build, dependencias ni framework: HTML, CSS y JavaScript puro. Los gatos animados son SVG generados en el navegador con el mismo ADN que usa el juego.
 

@@ -1,4 +1,4 @@
-/* Registro del service worker de Michidoku.
+/* Registro del service worker de Not me Meow!.
    Se carga con `defer` en todas las páginas; resuelve `sw.js` desde su propia
    URL, así funciona igual en la raíz (`pwa.js`) y en subdirectorios (`../pwa.js`). */
 (function () {
@@ -19,7 +19,7 @@
       // Si hay una versión nueva esperando, se activa en la siguiente carga.
       if (registro.waiting) registro.waiting.postMessage({ type: 'SKIP_WAITING' });
     }).catch(function (error) {
-      console.warn('[Michidoku] No se pudo registrar el service worker:', error);
+      console.warn('[Not me Meow!] No se pudo registrar el service worker:', error);
     });
   }
 

@@ -1,9 +1,9 @@
 ---
-name: Michidoku site change
-description: Use when editing any Michidoku landing page, CSS, theme, navigation, shared header/footer, metadata, or static route. Covers the page map, theme boot invariants, and a structural verification script.
+name: Not me Meow! site change
+description: Use when editing any Not me Meow! landing page, CSS, theme, navigation, shared header/footer, metadata, or static route. Covers the page map, theme boot invariants, and a structural verification script.
 ---
 
-# Michidoku site change
+# Not me Meow! site change
 
 ## Workflow
 

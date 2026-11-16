@@ -1,4 +1,4 @@
-/* Michidoku · sonidos compartidos con la app.
+/* Not me Meow! · sonidos compartidos con la app.
    Replica los cuatro avisos de michidoku-catgame/src/util/sonidos.ts:
    toque, seleccion, exito y aviso. Añade además los maullidos de la web
    (assets/sonidos/meow/meow_1.mp3 … meow_7.mp3), que se eligen al azar. */

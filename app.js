@@ -1,4 +1,4 @@
-/* Michidoku · landing interactions */
+/* Not me Meow! · landing interactions */
 (function () {
   'use strict';
 
@@ -600,7 +600,7 @@
       var url = URL.createObjectURL(blob);
       var link = document.createElement('a');
       link.href = url;
-      link.download = 'michidoku-' + currentName.toLowerCase().replace(/[^a-z0-9áéíóúüñ]+/gi, '-').replace(/^-|-$/g, '') + '.svg';
+      link.download = 'not-me-meow-' + currentName.toLowerCase().replace(/[^a-z0-9áéíóúüñ]+/gi, '-').replace(/^-|-$/g, '') + '.svg';
       document.body.appendChild(link);
       link.click();
       link.remove();

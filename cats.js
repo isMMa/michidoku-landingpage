@@ -1,5 +1,5 @@
 /*
- * Michidoku · generador de michis
+ * Not me Meow! · generador de michis
  * ------------------------------------------------------------------
  * Puerto a JavaScript puro del ADN de gatos del juego
  * (`src/util/cats/catDna.ts` + `CatKawaii.tsx`). Mismo nombre = mismo

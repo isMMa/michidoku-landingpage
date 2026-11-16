@@ -21,21 +21,21 @@
       chipSize: 'Tamaño',
       chipGrid: 'Tablero',
       chipSeed: 'Semilla',
-      abrir: 'Abrir en Michidoku',
+      abrir: 'Abrir en Not me Meow!',
       copiar: 'Copiar enlace',
       copiado: 'Enlace copiado al portapapeles.',
       copiarError: 'No se pudo copiar. Mantén pulsado el enlace para copiarlo a mano.',
       hint:
-        '¿No se abre la app? Comprueba que Michidoku está instalada y vuelve a pulsar el botón. ' +
+        '¿No se abre la app? Comprueba que Not me Meow! está instalada y vuelve a pulsar el botón. ' +
         'Si abres este enlace en un ordenador, copia el enlace y pégalo en el móvil.',
-      descargar: '¿Aún no tienes Michidoku? Descárgala aquí.',
-      abriendo: 'Abriendo Michidoku…',
+      descargar: '¿Aún no tienes la app? Descarga Not me Meow! aquí.',
+      abriendo: 'Abriendo Not me Meow!…',
       errorEyebrow: 'Enlace no válido',
       errorTitulo: 'Este enlace no lleva a ningún caso',
       errorTexto:
         'Puede que falte el tamaño o la semilla, o que el enlace se haya copiado incompleto. ' +
         'Pide que te lo compartan de nuevo.',
-      errorBoton: 'Ir a la web de Michidoku',
+      errorBoton: 'Ir a la web de Not me Meow!',
       terminos: 'Condiciones de uso',
       privacidad: 'Privacidad',
       dificultad: { 4: 'Rápida', 6: 'Normal', 8: 'Difícil' },
@@ -50,21 +50,21 @@
       chipSize: 'Size',
       chipGrid: 'Board',
       chipSeed: 'Seed',
-      abrir: 'Open in Michidoku',
+      abrir: 'Open in Not me Meow!',
       copiar: 'Copy link',
       copiado: 'Link copied to the clipboard.',
       copiarError: 'Could not copy. Long-press the link to copy it manually.',
       hint:
-        'App not opening? Check that Michidoku is installed and tap the button again. ' +
+        'App not opening? Check that Not me Meow! is installed and tap the button again. ' +
         'If you opened this link on a computer, copy it and paste it on your phone.',
-      descargar: 'No Michidoku yet? Download it here.',
-      abriendo: 'Opening Michidoku…',
+      descargar: 'Don\'t have Not me Meow! yet? Download it here.',
+      abriendo: 'Opening Not me Meow!…',
       errorEyebrow: 'Invalid link',
       errorTitulo: 'This link does not point to a case',
       errorTexto:
         'The size or seed may be missing, or the link may have been copied incompletely. ' +
         'Ask them to share it again.',
-      errorBoton: 'Go to the Michidoku website',
+      errorBoton: 'Go to the Not me Meow! website',
       terminos: 'Terms of use',
       privacidad: 'Privacy',
       dificultad: { 4: 'Quick', 6: 'Normal', 8: 'Hard' },
@@ -157,7 +157,7 @@
     if (chipTamano) chipTamano.textContent = t.chipSize;
 
     document.title =
-      (size !== null ? t.title(MEDIDAS[size]) : t.errorTitulo) + ' · Michidoku';
+      (size !== null ? t.title(MEDIDAS[size]) : t.errorTitulo) + ' · Not me Meow!';
 
     try {
       localStorage.setItem('michidoku-lang', idioma);
