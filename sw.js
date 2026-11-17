@@ -3,17 +3,17 @@
    Al cambiar los archivos del shell, sube VERSION para invalidar la caché. */
 'use strict';
 
-var VERSION = 'v12';
+var VERSION = 'v13';
 var SHELL_CACHE = 'michidoku-shell-' + VERSION;
 var PAGE_CACHE = 'michidoku-pages-' + VERSION;
 var FONT_CACHE = 'michidoku-fonts-' + VERSION;
 var OFFLINE_URL = '/offline.html';
 var PRECACHE_URLS = [
   '/',
-  '/styles.css?v=12',
-  '/app.js?v=12',
-  '/cats.js?v=12',
-  '/sonidos.js?v=12',
+  '/styles.css?v=13',
+  '/app.js?v=13',
+  '/cats.js?v=13',
+  '/sonidos.js?v=13',
   '/assets/sonidos/toque.wav',
   '/assets/sonidos/seleccion.wav',
   '/assets/sonidos/exito.wav',
@@ -25,7 +25,7 @@ var PRECACHE_URLS = [
   '/assets/sonidos/meow/meow_5.mp3',
   '/assets/sonidos/meow/meow_6.mp3',
   '/assets/sonidos/meow/meow_7.mp3',
-  '/pwa.js?v=12',
+  '/pwa.js?v=13',
   '/manifest.webmanifest',
   OFFLINE_URL,
   '/assets/icon.png',
@@ -34,11 +34,11 @@ var PRECACHE_URLS = [
   '/assets/icon-512.png',
   '/assets/apple-touch-icon.png',
   '/caso/',
-  '/caso/caso.js?v=12',
+  '/caso/caso.js?v=13',
   '/privacidad/',
   '/terminos/',
-  '/legal.css?v=12',
-  '/legal.js?v=12'
+  '/legal.css?v=13',
+  '/legal.js?v=13'
 ];
 
 self.addEventListener('install', function (event) {

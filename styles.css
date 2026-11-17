@@ -958,84 +958,205 @@ p {
   box-shadow: var(--board-shadow), 0 0 80px -40px rgba(255, 201, 60, 0.5);
 }
 
-.house-frame::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 1px solid var(--border);
-  border-radius: calc(var(--radius-lg) - 8px);
-  pointer-events: none;
-}
-
 .house {
+  /* Paleta de la casa clásica del juego (día). El tema noche la sobrescribe. */
+  --floor-wall: #6f523a;
+  --floor-grid: #bfa184;
+  --floor-dot: #c9b7a6;
+  --floor-label-bg: #fffcf6;
+  --floor-label-text: #6b5344;
+  --floor-label-border: rgba(122, 98, 82, 0.35);
+  --cat-chip-bg: rgba(255, 250, 242, 0.9);
+  --cat-chip-text: #4a3a32;
+  --cat-shadow: rgba(46, 31, 22, 0.22);
+  --board-hover: rgba(176, 96, 0, 0.11);
+  --yarn-frame: rgba(161, 92, 0, 0.35);
+  --yarn-halo: rgba(255, 201, 60, 0.42);
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
   aspect-ratio: 1;
-  border-radius: 18px;
-  overflow: hidden;
   position: relative;
-  box-shadow: 0 0 0 1px var(--border-strong) inset, 0 24px 50px -30px var(--shadow) inset;
-  background: #1b1a29;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid var(--floor-wall);
+  background: var(--floor-label-bg);
+  box-shadow: 0 18px 40px -26px var(--shadow), 0 0 0 1px rgba(0, 0, 0, 0.22) inset;
 }
 
+[data-theme='noche'] .house {
+  --floor-wall: #0b0a10;
+  --floor-grid: #8f765a;
+  --floor-dot: #6b5a48;
+  --floor-label-bg: #1e2638;
+  --floor-label-text: #f0e1c4;
+  --floor-label-border: rgba(255, 224, 170, 0.25);
+  --cat-chip-bg: rgba(30, 38, 56, 0.92);
+  --cat-chip-text: #f6e9d2;
+  --cat-shadow: rgba(0, 0, 0, 0.5);
+  --board-hover: rgba(227, 192, 138, 0.12);
+  --yarn-frame: rgba(227, 192, 138, 0.4);
+  --yarn-halo: rgba(255, 210, 120, 0.35);
+}
+
+/* Suelos por habitación --------------------------------------------------- */
+.house-floors {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.room {
+  position: absolute;
+  overflow: hidden;
+  background-color: var(--floor-base);
+  box-shadow: inset 0 0 0 2px var(--floor-wall);
+}
+
+.room-salon {
+  --floor-base: #e6f2d5;
+  --floor-tono: #d9ebbf;
+  --floor-linea: #c6dba7;
+  /* Tarima: tablas horizontales con juntas alternas. */
+  background-color: var(--floor-tono);
+  background-image:
+    repeating-linear-gradient(0deg, var(--floor-linea) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(90deg, var(--floor-linea) 0 1px, transparent 1px 42px);
+}
+
+.room-cocina {
+  --floor-base: #ffe3d3;
+  --floor-tono: #ffd4c0;
+  --floor-linea: #efc0a6;
+  /* Baldosas en damero con junta marcada. */
+  background-image:
+    linear-gradient(45deg, var(--floor-tono) 25%, transparent 25%, transparent 75%, var(--floor-tono) 75%),
+    linear-gradient(45deg, var(--floor-tono) 25%, transparent 25%, transparent 75%, var(--floor-tono) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.room-dormitorio {
+  --floor-base: #dcebff;
+  --floor-tono: #cce0fa;
+  --floor-linea: #b5cff2;
+  /* Papel pintado de rayas verticales con un lunar. */
+  background-image:
+    radial-gradient(circle at 11px 8px, color-mix(in srgb, var(--floor-linea) 60%, transparent) 1.2px, transparent 1.6px),
+    repeating-linear-gradient(90deg, var(--floor-tono) 0 6px, transparent 6px 16px);
+  background-size: 16px 16px, auto;
+}
+
+.room-bano {
+  --floor-base: #d9f2f0;
+  --floor-tono: #c7eae6;
+  --floor-linea: #ace0da;
+  /* Azulejos pequeños con una pastilla central. */
+  background-image:
+    radial-gradient(circle at 6px 6px, color-mix(in srgb, var(--floor-linea) 55%, transparent) 1.1px, transparent 1.5px),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--floor-linea) 55%, transparent) 0 1px, transparent 1px 12px),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--floor-linea) 55%, transparent) 0 1px, transparent 1px 12px);
+  background-size: 12px 12px;
+}
+
+.room-terraza {
+  --floor-base: #eaddf8;
+  --floor-tono: #e0cdf4;
+  --floor-linea: #ccb4ea;
+  /* Césped: matas sueltas inclinadas. */
+  background-image:
+    repeating-linear-gradient(118deg, transparent 0 10px, color-mix(in srgb, var(--floor-linea) 55%, transparent) 10px 11px, transparent 11px 18px),
+    repeating-linear-gradient(64deg, transparent 0 13px, color-mix(in srgb, var(--floor-linea) 45%, transparent) 13px 14px, transparent 14px 22px);
+}
+
+[data-theme='noche'] .room-salon {
+  --floor-base: #4b523e;
+  --floor-tono: #565e47;
+  --floor-linea: #798562;
+}
+
+[data-theme='noche'] .room-cocina {
+  --floor-base: #604337;
+  --floor-tono: #6c4a3b;
+  --floor-linea: #976656;
+}
+
+[data-theme='noche'] .room-dormitorio {
+  --floor-base: #3d4964;
+  --floor-tono: #465371;
+  --floor-linea: #627ba7;
+}
+
+[data-theme='noche'] .room-bano {
+  --floor-base: #395057;
+  --floor-tono: #415c64;
+  --floor-linea: #5d7d87;
+}
+
+[data-theme='noche'] .room-terraza {
+  --floor-base: #39524f;
+  --floor-tono: #425e5a;
+  --floor-linea: #5c817b;
+}
+
+/* Retícula de casillas: transparente para dejar ver el suelo de la sala. */
 .cell {
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: background 0.3s ease, filter 0.3s ease;
-}
-
-.cell.room-salon {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    #c9a06e;
-  background-size: 22px 22px, 22px 22px, auto;
-}
-
-.cell.room-cocina {
-  background:
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.16) 0 8px, transparent 8px 16px),
-    #e3cba9;
-}
-
-.cell.room-dormitorio {
-  background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0 10px, transparent 10px 20px),
-    #b9a6cf;
-}
-
-.cell.room-bano {
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px),
-    #9dc8d4;
-  background-size: 14px 14px, 14px 14px, auto;
-}
-
-.cell.room-terraza {
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 1px, transparent 2px),
-    radial-gradient(circle at 70% 65%, rgba(0, 0, 0, 0.12) 1px, transparent 2px),
-    #9dbb6e;
-  background-size: 18px 18px, 16px 16px, auto;
+  z-index: 1;
+  border: 1px solid color-mix(in srgb, var(--floor-grid) 65%, transparent);
+  transition: background-color 0.3s ease;
 }
 
 .cell.is-hover-row,
 .cell.is-hover-col {
-  filter: brightness(1.18);
+  background-color: var(--board-hover);
 }
 
-.cell .room-label {
+.cell-dot {
   position: absolute;
-  top: 5px;
-  left: 7px;
-  font-size: 0.55rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(42, 30, 20, 0.55);
+  left: 50%;
+  top: 50%;
+  width: 11%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--floor-dot);
+  opacity: 0.75;
+}
+
+.room-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
   pointer-events: none;
+}
+
+.room-plate {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  transform: translateY(-52%);
+  border-radius: 5px;
+  border: 1px solid var(--floor-label-border);
+  background: var(--floor-label-bg);
+  color: var(--floor-label-text);
+  font-family: var(--font-display);
+  font-size: clamp(9px, 1.15vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.16), 0 1px 0 rgba(255, 255, 255, 0.75) inset;
+}
+
+.room-plate.is-inside {
+  transform: none;
+}
+
+[data-theme='noche'] .room-plate {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.08) inset;
 }
 
 .board-prop {
@@ -1043,43 +1164,95 @@ p {
   display: grid;
   place-items: center;
   pointer-events: none;
-  opacity: 0.94;
+  z-index: 2;
   filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.18));
 }
 
 .board-prop svg {
-  width: 72%;
-  height: 72%;
+  width: 80%;
+  height: 80%;
 }
 
 .board-cat {
   position: absolute;
-  display: grid;
-  place-items: center;
+  display: block;
   pointer-events: auto;
   cursor: pointer;
   transition: transform 0.28s var(--ease-out), filter 0.28s ease, opacity 0.28s ease;
   z-index: 3;
-  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.24));
   border: 0;
   background: transparent;
   color: inherit;
+  padding: 0;
 }
 
-.board-cat svg {
-  width: 70%;
-  height: 70%;
+.board-cat-figure {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 0;
+  bottom: 11%;
+  display: grid;
+  place-items: center;
+  transform-origin: 50% 96%;
+  animation: board-cat-idle 8.4s ease-in-out infinite;
+  animation-delay: var(--cat-idle-delay, 0s);
+}
+
+.board-cat-figure svg {
+  width: 94%;
+  height: 94%;
+}
+
+.cat-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  width: 58%;
+  height: 8%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--cat-shadow);
+  filter: blur(1px);
+  z-index: 0;
+}
+
+.cat-name {
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  transform: translateX(-50%);
+  z-index: 2;
+  max-width: 98%;
+  padding: 0 4px;
+  border-radius: 5px;
+  background: var(--cat-chip-bg);
+  color: var(--cat-chip-text);
+  font-family: var(--font-display);
+  font-size: clamp(8px, 1.05vw, 11px);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
 }
 
 .board-cat:hover,
 .board-cat.is-active {
-  transform: scale(1.12) translateY(-3px);
+  transform: scale(1.08) translateY(-2px);
   filter: drop-shadow(0 0 14px rgba(255, 201, 60, 0.9)) drop-shadow(0 7px 7px rgba(0, 0, 0, 0.22));
   z-index: 6;
 }
 
+.board-cat.is-active .board-cat-figure {
+  animation: board-cat-alert 1.15s ease-in-out infinite;
+}
+
 .board-cat.is-dimmed {
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 .board-yarn {
@@ -1088,16 +1261,79 @@ p {
   place-items: center;
   z-index: 2;
   cursor: pointer;
+  transition: transform 0.28s var(--ease-out);
+}
+
+.board-yarn::before {
+  content: '';
+  position: absolute;
+  inset: 6%;
+  border-radius: 8px;
+  background: radial-gradient(circle at 50% 50%, var(--yarn-halo), transparent 70%);
+  animation: board-yarn-glow 4.6s ease-in-out infinite;
+}
+
+.board-yarn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  border: 2px solid var(--yarn-frame);
 }
 
 .board-yarn svg {
-  width: 64%;
-  height: 64%;
+  position: relative;
+  z-index: 1;
+  width: 66%;
+  height: 66%;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
 .board-yarn:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
+}
+
+/* Los michis del tablero dan un saltito de vez en cuando, como al colocarlos. */
+@keyframes board-cat-idle {
+  0%,
+  74%,
+  100% {
+    transform: translateY(0);
+  }
+  78% {
+    transform: translateY(-5%);
+  }
+  82% {
+    transform: translateY(0);
+  }
+  86% {
+    transform: translateY(-2.5%);
+  }
+  90% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes board-cat-alert {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-6%) rotate(2deg);
+  }
+}
+
+@keyframes board-yarn-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
 }
 
 .clue-list {

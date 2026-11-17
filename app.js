@@ -308,30 +308,33 @@
   }
 
   if (board) {
-    var labels = {
-      '0-0': 'Salón',
-      '0-4': 'Cocina',
-      '3-0': 'Dormitorio',
-      '3-2': 'Baño',
-      '3-4': 'Terraza',
-    };
+    // Misma planta que el tablero de ejemplo del juego: cinco habitaciones
+    // rectangulares contiguas con su propio suelo y su placa de nombre.
+    var rooms = [
+      { id: 'salon', name: 'Salón', r0: 0, r1: 3, c0: 0, c1: 4 },
+      { id: 'cocina', name: 'Cocina', r0: 0, r1: 3, c0: 4, c1: 6 },
+      { id: 'dormitorio', name: 'Dormitorio', r0: 3, r1: 6, c0: 0, c1: 2 },
+      { id: 'bano', name: 'Baño', r0: 3, r1: 6, c0: 2, c1: 4 },
+      { id: 'terraza', name: 'Terraza', r0: 3, r1: 6, c0: 4, c1: 6 },
+    ];
 
-    for (var row = 0; row < 6; row++) {
-      for (var col = 0; col < 6; col++) {
-        var cell = document.createElement('div');
-        cell.className = 'cell room-' + roomAt(row, col);
-        cell.dataset.row = row;
-        cell.dataset.col = col;
-        var label = labels[row + '-' + col];
-        if (label) {
-          var labelSpan = document.createElement('span');
-          labelSpan.className = 'room-label';
-          labelSpan.textContent = label;
-          cell.appendChild(labelSpan);
-        }
-        board.appendChild(cell);
-      }
+    function regionStyle(r0, r1, c0, c1) {
+      return 'left:' + (c0 * 100 / 6) + '%;top:' + (r0 * 100 / 6) + '%;width:' +
+        ((c1 - c0) * 100 / 6) + '%;height:' + ((r1 - r0) * 100 / 6) + '%;';
     }
+
+    // Suelo continuo por habitación, como en el juego: las casillas solo
+    // dibujan la retícula encima y dejan ver la trama de cada sala.
+    var floors = document.createElement('div');
+    floors.className = 'house-floors';
+    floors.setAttribute('aria-hidden', 'true');
+    rooms.forEach(function (room) {
+      var floor = document.createElement('div');
+      floor.className = 'room room-' + room.id;
+      floor.style.cssText = regionStyle(room.r0, room.r1, room.c0, room.c1);
+      floors.appendChild(floor);
+    });
+    board.appendChild(floors);
 
     var props = [
       { row: 4, col: 1, icon: 'i-box' },
@@ -339,8 +342,35 @@
       { row: 1, col: 5, icon: 'i-bowl' },
       { row: 0, col: 5, icon: 'i-plant' },
       { row: 5, col: 4, icon: 'i-litter' },
-      { row: 0, col: 0, icon: 'i-sofa' },
+      { row: 1, col: 1, icon: 'i-sofa' },
     ];
+
+    var boardCats = [
+      { name: 'Misi', row: 4, col: 0 },
+      { name: 'Luna', row: 1, col: 4 },
+      { name: 'Tom', row: 3, col: 2 },
+    ];
+
+    var taken = {};
+    props.forEach(function (prop) { taken[prop.row + '-' + prop.col] = true; });
+    taken['4-2'] = true;
+    boardCats.forEach(function (cat) { taken[cat.row + '-' + cat.col] = true; });
+
+    for (var row = 0; row < 6; row++) {
+      for (var col = 0; col < 6; col++) {
+        var cell = document.createElement('div');
+        cell.className = 'cell room-' + roomAt(row, col);
+        cell.dataset.row = row;
+        cell.dataset.col = col;
+        if (!taken[row + '-' + col]) {
+          var dot = document.createElement('span');
+          dot.className = 'cell-dot';
+          dot.setAttribute('aria-hidden', 'true');
+          cell.appendChild(dot);
+        }
+        board.appendChild(cell);
+      }
+    }
 
     props.forEach(function (prop) {
       var element = document.createElement('div');
@@ -357,12 +387,6 @@
     yarn.title = 'Ovillo roto · Baño';
     board.appendChild(yarn);
 
-    var boardCats = [
-      { name: 'Misi', row: 4, col: 0 },
-      { name: 'Luna', row: 1, col: 4 },
-      { name: 'Tom', row: 3, col: 2 },
-    ];
-
     boardCats.forEach(function (data) {
       var button = document.createElement('button');
       button.type = 'button';
@@ -370,16 +394,36 @@
       button.dataset.cat = data.name;
       button.dataset.row = data.row;
       button.dataset.col = data.col;
-      button.style.cssText = positionStyle(data.row, data.col);
+      button.style.cssText = positionStyle(data.row, data.col) +
+        '--cat-idle-delay:-' + (data.row * 1.7 + data.col * 0.9).toFixed(2) + 's;';
       button.setAttribute('aria-label', 'Michi ' + data.name + ', pista relacionada');
-      button.innerHTML = Cats.renderCat({
-        name: data.name,
-        color: colorFor(data.name),
-        size: 110,
-        label: 'Michi ' + data.name,
-      });
+      // Sombra de contacto + placa con el nombre, como la ficha del juego.
+      button.innerHTML =
+        '<span class="cat-shadow" aria-hidden="true"></span>' +
+        '<span class="board-cat-figure">' + Cats.renderCat({
+          name: data.name,
+          color: colorFor(data.name),
+          size: 120,
+          label: 'Michi ' + data.name,
+        }) + '</span>' +
+        '<span class="cat-name" aria-hidden="true">' + data.name + '</span>';
       board.appendChild(button);
     });
+
+    // Placas de habitación: se apoyan sobre la pared superior de cada sala,
+    // igual que en el juego. La fila superior va dentro para que no se recorte.
+    var labelLayer = document.createElement('div');
+    labelLayer.className = 'room-labels';
+    labelLayer.setAttribute('aria-hidden', 'true');
+    rooms.forEach(function (room) {
+      var plate = document.createElement('span');
+      plate.className = 'room-plate' + (room.r0 === 0 ? ' is-inside' : '');
+      plate.textContent = room.name;
+      plate.style.cssText = 'left:calc(' + (room.c0 * 100 / 6) + '% + 4px);top:' +
+        (room.r0 === 0 ? '4px' : (room.r0 * 100 / 6) + '%') + ';';
+      labelLayer.appendChild(plate);
+    });
+    board.appendChild(labelLayer);
 
     var clues = $$('.clue');
     var pinned = null;
