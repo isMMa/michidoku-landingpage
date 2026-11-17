@@ -53,11 +53,12 @@ También puedes usar `npx serve .` si prefieres Node. No abras `index.html` con 
 ├─ offline.html                Página de sin conexión
 ├─ manifest.webmanifest        Manifiesto de la PWA
 ├─ assets/
-│  ├─ icon.png                 Icono base 1024 (también OG image)
+│  ├─ logo.png · icon.png      Icono de la app (256 / 512)
 │  ├─ icon-192.png · icon-512.png
 │  ├─ icon-maskable-192.png · icon-maskable-512.png
 │  ├─ apple-touch-icon.png     Icono iOS 180
-│  └─ michidoku-icon.svg       Icono vectorial
+│  ├─ og-image.png             Vista previa social 1200×630
+│  └─ michidoku-icon.svg       Arte vectorial legado
 ├─ .well-known/
 │  ├─ assetlinks.json          App Links de Android
 │  └─ apple-app-site-association.example

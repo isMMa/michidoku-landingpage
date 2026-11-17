@@ -124,7 +124,7 @@
       // Sin gato generado: se queda el icono de la app.
     }
     var img = document.createElement('img');
-    img.src = '../assets/michidoku-icon.svg';
+    img.src = '../assets/logo.png';
     img.alt = '';
     img.width = 120;
     img.height = 120;

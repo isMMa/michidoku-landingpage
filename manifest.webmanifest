@@ -26,7 +26,7 @@
     },
     {
       "src": "/assets/icon.png",
-      "sizes": "1024x1024",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
@@ -43,9 +43,9 @@
       "purpose": "maskable"
     },
     {
-      "src": "/assets/michidoku-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
       "purpose": "any"
     }
   ]

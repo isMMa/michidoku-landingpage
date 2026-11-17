@@ -16,8 +16,9 @@
   variant).
 - Case and legal pages share the simplified `page-header` / `page-footer`
   structure.
-- Brand asset: `assets/logo.png` (transparent adaptive icon); padded app/OG
-  image: `assets/icon.png`. `assets/michidoku-icon.svg` is kept as legacy art. Social preview: `assets/og-image.png` (1200×630).
+- Brand asset: `assets/logo.png` and `assets/icon.png` (app icon artwork,
+  256 and 512). `assets/michidoku-icon.svg` is kept as legacy art. Social
+  preview: `assets/og-image.png` (1200×630, from the extended artwork).
 - `/caso/` is `noindex, follow` and intentionally excluded from `sitemap.xml`.
 
 `/caso/` is `noindex, follow` because its content is query-driven; it is
